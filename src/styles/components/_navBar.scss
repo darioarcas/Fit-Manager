@@ -1,0 +1,20 @@
+.nav-bar{
+    height: 100vh;
+    background-color: rgb(1, 10, 22);
+}
+
+.color-white{
+    transition: color .2s ease-in-out;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.color-secundary{
+    transition: color .2s ease-in-out;
+    color: rgb(182, 83, 2);
+}
+
+
+// .posicion-fija{
+//     position: fixed;
+// }

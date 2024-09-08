@@ -1,0 +1,26 @@
+
+// Estilos del scroll
+
+
+/* Estilo para toda la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 7px; /* Ancho de la barra de desplazamiento vertical */
+    height: 12px; /* Altura de la barra de desplazamiento horizontal */
+}
+
+/* Estilo para el fondo de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del fondo */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilo para el "pulgar" (thumb) de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+    background: #d4d4d4; /* Color del pulgar */
+    border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilo para el "pulgar" al pasar el mouse sobre él */
+::-webkit-scrollbar-thumb:hover {
+    background: #c5c5c5; /* Color del pulgar al pasar el mouse */
+}
