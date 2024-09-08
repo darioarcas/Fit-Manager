@@ -68,7 +68,7 @@ export const AppRouter = () => {
   return (
     <div>
         
-        <BrowserRouter >
+        <BrowserRouter basename="/Fit-Manager">
             <Routes>
 
                 <Route path="/login" element={
