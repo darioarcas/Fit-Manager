@@ -6,6 +6,7 @@ import { FitManagerAppPublico } from './FitManagerAppPublico';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <h1>PAGINA</h1>
     <FitManagerAppPublico />
   </React.StrictMode>
 );
