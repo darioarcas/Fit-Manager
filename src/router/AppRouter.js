@@ -68,16 +68,17 @@ export const AppRouter = () => {
   return (
     <div>
         
-        <BrowserRouter basename="/Fit-Manager">
+        {/* <BrowserRouter basename="/Fit-Manager"> */}
+        <BrowserRouter>
             <Routes>
 
-                <Route path="/login" element={
+                <Route path="/Fit-Manager/login" element={
                     <PublicRoute isLoggedIn={isLoggedIn}>
                         <LoginScreen />
                     </PublicRoute>
                 }/>
 
-                <Route path="/*" element={
+                <Route path="/Fit-Manager/*" element={
                     <PrivateRoute isLoggedIn={isLoggedIn}>
                         <FitManagerApp />
                     </PrivateRoute>
