@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "../../../hooks/useForm"
+import { useForm } from "../../../../hooks/useForm"
 import { useEffect, useRef } from "react";
-import { activarAlumno, cierraFormulario, eliminarAlumno, guardarAlumno } from "../../../actions/alumno";
+import { activarAlumno, cierraFormulario, eliminarAlumno, guardarAlumno } from "../../../../actions/alumno";
 
 export const AlumnoInfo = () => {
 
@@ -11,7 +11,6 @@ export const AlumnoInfo = () => {
     const [formValues, handleInputChange, reset] = useForm(alumnoActivo);
 
     const {nombre, pais, celular, ficha, plan, costo, fechaInicio, fechaFinal} = formValues;
-    console.log('aca: ', alumnoActivo.nombre);
 
 
 
@@ -116,23 +115,23 @@ export const AlumnoInfo = () => {
 
         <form className="container bg-black form-control border-info w-75 rounded-end">
             <div className="container d-flex flex-column ">
-                    <input type="text" name="nombre" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Nombre" value={nombre} onChange={handleInputChange}></input>
+                    <input key={nombre} type="text" name="nombre" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Nombre" value={nombre} onChange={handleInputChange}></input>
                     
-                    <select name="pais" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" value={pais} onChange={handleInputChange}>
+                    <select key={pais} name="pais" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" value={pais} onChange={handleInputChange}>
                         <option value="">--Seleccione un país--</option>
                         {countries.map((country) => (
-                        <option >
+                        <option key={country.name} >
                             {country.name}
                         </option>
                         ))}
                     </select>
 
-                    <input type="text" name="celular" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Celular" value={celular} onChange={handleInputChange}></input>
-                    <input type="text" name="ficha" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Ficha" value={ficha} onChange={handleInputChange}></input>
-                    <input type="text" name="plan" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Plan" value={plan} onChange={handleInputChange}></input>
-                    <input type="text" name="costo" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Costo" value={costo} onChange={handleInputChange}></input>
-                    <input type="date" name="fechaInicio" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Fecha de Inicio" value={fechaInicio} onChange={handleInputChange}></input>
-                    <input type="date" name="fechaFinal" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Fecha Final" value={fechaFinal} onChange={handleInputChange}></input>
+                    <input key={celular} type="text" name="celular" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Celular" value={celular} onChange={handleInputChange}></input>
+                    <input key={ficha} type="text" name="ficha" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Ficha" value={ficha} onChange={handleInputChange}></input>
+                    <input key={plan} type="text" name="plan" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Plan" value={plan} onChange={handleInputChange}></input>
+                    <input key={costo} type="text" name="costo" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Costo" value={costo} onChange={handleInputChange}></input>
+                    <input key={fechaInicio} type="date" name="fechaInicio" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Fecha de Inicio" value={fechaInicio} onChange={handleInputChange}></input>
+                    <input key={fechaFinal} type="date" name="fechaFinal" className="bg-white bg-opacity-10 color-white form-control border-success mb-2 mt-1" placeholder="Fecha Final" value={fechaFinal} onChange={handleInputChange}></input>
 
 
 

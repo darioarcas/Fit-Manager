@@ -1,5 +1,4 @@
-import React from 'react';
-import { AlumnoInfo } from './informacion-pagina/AlumnoInfo';
+import { AlumnoInfo } from './informacion-paginas/inicio/AlumnoInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { activarAlumno, agregarAlumno } from '../../actions/alumno';
 
@@ -32,8 +31,6 @@ export const Inicio = (valor) => {
   // const fecha = moment(alumnos.fechaCreado);
 
   const alumnoActivo = useSelector((store)=>{return store.alumnos.active});
-
-  console.log(alumnos);
 
 
 

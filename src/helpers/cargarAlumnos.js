@@ -18,7 +18,7 @@ export const cargarAlumnos = async (uid)=>{
     
     
 
-    console.log(notes);
+    // console.log(notes);
     
 
     return notes;

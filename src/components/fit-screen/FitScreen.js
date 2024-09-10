@@ -1,17 +1,16 @@
-import { Route, Routes } from "react-router-dom"
-import { Inicio } from "../components-pages/Inicio"
-import { Perfil } from "../components-pages/Perfil"
-import { Pago } from "../components-pages/Pago"
-import { Dietas } from "../components-pages/Dietas"
-import { Rutinas } from "../components-pages/Rutinas"
-import { Calculadora } from "../components-pages/Calculadora"
-import { Ajustes } from "../components-pages/Ajustes"
+import { Route, Routes } from "react-router-dom";
+import { Inicio } from "../components-pages/Inicio";
+import { Perfil } from "../components-pages/Perfil";
+import { Pago } from "../components-pages/Pago";
+import { Dietas } from "../components-pages/Dietas";
+import { Rutinas } from "../components-pages/Rutinas";
+import { Calculadora } from "../components-pages/Calculadora";
+import { Ajustes } from "../components-pages/Ajustes";
 
 
 export const FitScreen = () => {
   return (
     <div className="feet-screen">
-
 
         {/* Ruteo de paginas */}
         <Routes>
