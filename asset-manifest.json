@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Fit-Manager/static/css/main.df948078.css",
-    "main.js": "/Fit-Manager/static/js/main.052a4476.js",
+    "main.js": "/Fit-Manager/static/js/main.e37dadcd.js",
     "index.html": "/Fit-Manager/index.html",
     "main.df948078.css.map": "/Fit-Manager/static/css/main.df948078.css.map",
-    "main.052a4476.js.map": "/Fit-Manager/static/js/main.052a4476.js.map"
+    "main.e37dadcd.js.map": "/Fit-Manager/static/js/main.e37dadcd.js.map"
   },
   "entrypoints": [
     "static/css/main.df948078.css",
-    "static/js/main.052a4476.js"
+    "static/js/main.e37dadcd.js"
   ]
 }
