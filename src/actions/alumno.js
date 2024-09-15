@@ -116,6 +116,8 @@ export const activarAlumno = (id, alumno)=>{
 
 
 
+
+// actualizar alumno
 export const guardarAlumno = (alumno)=>{
 
   // utilizamos el midleware

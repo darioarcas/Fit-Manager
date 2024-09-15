@@ -23,12 +23,12 @@ export const NavBar = () => {
 
             {/* <div className="container-fluid"> */}
 
-                <button className="navbar nav-bar-dark bg-black opacity-50 navbar-toggler position-absolute position-fixed top-0 start-0 m-3"   type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <button className="navbar nav-bar-dark bg-black opacity-50 navbar-toggler position-fixed top-0 start-0 m-3 mt-4"   type="button" data-bs-target="#offcanvasNavbar" data-bs-toggle="offcanvas">
                 <span className="navbar-toggler-icon"></span>
                 </button>
 
 
-                <div className="offcanvas offcanvas-start text-bg-dark w-20-porciento" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div className="offcanvas offcanvas-start text-bg-dark w-20-porciento" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                    
                     <nav className="navbar bg-body-tertiary p-0">
 

@@ -30,7 +30,7 @@ const initialState = {
 export const alumnosReducer = (state = initialState, action)=>{
     
     switch (action.type) {
-
+        // Alumno Activo
         case types.alumnoActive:
             return {
                 ...state,
@@ -39,7 +39,10 @@ export const alumnosReducer = (state = initialState, action)=>{
                 }
             }
 
-
+        
+            
+        
+        // Se cargan los alumnos desde el action al store
         case types.alumnoLoad:
             return {
                 ...state,
@@ -48,6 +51,9 @@ export const alumnosReducer = (state = initialState, action)=>{
 
 
 
+
+
+        // Se guarda un nuevo alumno
         case types.alumnoAddNew:
             return{
                 ...state,
@@ -56,6 +62,10 @@ export const alumnosReducer = (state = initialState, action)=>{
 
 
 
+
+
+
+        // Se modifica un alumno
         case types.alumnoUpdate:
             return{
                 ...state,
@@ -63,17 +73,14 @@ export const alumnosReducer = (state = initialState, action)=>{
                     (alumno) => (alumno.id === action.payload.id)
                         ? action.payload.alumno
                         : alumno
-                )
+                    )
             }
-
-        case types.cerrarFormulario:
-            return {
-                ...state,
-                active: null
-            }
-
-
-
+                
+                
+                
+                
+                
+        // Se elimina un alumno
         case types.alumnoDelete:
             return{
                 ...state,
@@ -81,10 +88,23 @@ export const alumnosReducer = (state = initialState, action)=>{
                 // Devuelve todos los alumnos, exeptuando el que coincida con el id del payload
                 notes: state.notes.filter(alumno => alumno.id !== action.payload)
             }
+    
 
 
+    
+    
+        // Se cierra el formulario, el alumno ya no es el activo en el store
+        case types.cerrarFormulario:
+            return {
+                ...state,
+                active: null
+            }
+                    
+                    
+                    
+                    
 
-
+        // Se borran los datos del store cuando se cierra sesion
         case types.alumnoLogoutCleaning:
             return{
                 ...state,

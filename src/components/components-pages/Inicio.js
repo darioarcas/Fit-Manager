@@ -60,21 +60,21 @@ export const Inicio = (valor) => {
 
 
 
-        <table className="table table-dark table-bordered border-success table-hover w-75">
+        <table className="table table-dark table-bordered border-success table-hover w-75" style={{fontSize:"12px"}}>
           <thead className='table-secondary'>
 
                     {/* Columnas */}
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Pais</th>
-              <th scope="col">Celular</th>
-              <th scope="col">Ficha</th>
-              <th scope="col">Plan</th>
-              <th scope="col">Costo</th>
-              <th scope="col">FechaInicio</th>
-              <th scope="col">FechaFinal</th>
-              <th scope="col">Dias Restantes</th>
+            <tr >
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>#</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Nombre</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Pais</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Celular</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Ficha</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Plan</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Costo</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>FechaInicio</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>FechaFinal</th>
+              <th scope="col" style={{padding:"0", width: "8px", fontSize:"11px"}}>Dias Restantes</th>
             </tr>
           </thead>
 
@@ -89,16 +89,16 @@ export const Inicio = (valor) => {
                   
                   return(
                     <tr key={index} onClick={()=>{ return handleAlumno(alumno.id, alumno)}}>
-                      <th scope="row" >{index + 1}</th>
-                      <td>{alumno.nombre}</td>
-                      <td>{alumno.pais}</td>
-                      <td>{alumno.celular}</td>
-                      <td>{alumno.ficha}</td>
-                      <td>{alumno.plan}</td>
-                      <td>{alumno.costo}</td>
-                      <td>{alumno.fechaInicio}</td>
-                      <td>{alumno.fechaFinal}</td>
-                      <td>Faltan 2 dias</td>
+                      <th scope="row" style={{padding:"0", width: "9px", fontSize:"8px"}}>{index + 1}</th>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.nombre}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.pais}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.celular}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.ficha}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.plan}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.costo}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.fechaInicio}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>{alumno.fechaFinal}</td>
+                      <td style={{padding:"2px", width: "7px", height: "30px", fontSize:"8px"}}>Faltan 2 dias</td>
                     </tr>
                   )
                 })

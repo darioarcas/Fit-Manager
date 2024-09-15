@@ -11,6 +11,7 @@ import { Ajustes } from "../components-pages/Ajustes";
 export const FitScreen = () => {
   return (
     <div className="feet-screen">
+        
 
         {/* Ruteo de paginas */}
         <Routes>
