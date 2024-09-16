@@ -1,4 +1,4 @@
-import { alimentos } from './arreglos';
+import { alimentos } from '../arreglos';
 import { useState } from 'react';
 
 

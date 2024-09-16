@@ -1,13 +1,46 @@
-import { alimentos } from './arreglos';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { alimentos } from '../arreglos';
+import { useEffect, useState } from 'react';
+import { actualizarProteina } from '../../../../../actions/dietas';
 
 
 
-export const SelectorAlimentos7 = ({setAlimentos7, setearAlimentos}) => {
+export const SelectorAlimentos1 = ({setAlimentos1, setearAlimentos}) => {
+
+
+
 
 
   const [seleccionado, setSeleccionado] = useState(alimentos[0]);
   const [cantidad, setCantidad] = useState(0);
+
+
+
+
+
+
+
+    // // Calcular los valores cuando cambia la cantidad
+    // useEffect(() => {
+    //   const calcularValores = () => {
+        
+    //     const factor = cantidad / seleccionado.cantidad;
+        
+        
+        
+    //     return {
+          
+    //       calorias: (seleccionado.calorias * factor).toFixed(2),
+    //       proteinas: (seleccionado.proteinas * factor).toFixed(2),
+    //       carbohidratos: (seleccionado.carbohidratos * factor).toFixed(2),
+    //       grasas: (seleccionado.grasas * factor).toFixed(2),
+    //     };
+        
+    //   };
+    //   const totales = calcularValores();
+    //   setAlimentos1(totales);
+    // }, [cantidad])
+    
 
 
 
@@ -18,6 +51,8 @@ export const SelectorAlimentos7 = ({setAlimentos7, setearAlimentos}) => {
     setSeleccionado(alimentoSeleccionado);
     setCantidad(0); // Reiniciar la cantidad al cambiar el alimento
   };
+
+
 
 
 
@@ -37,10 +72,12 @@ export const SelectorAlimentos7 = ({setAlimentos7, setearAlimentos}) => {
       grasas: (seleccionado.grasas * factor).toFixed(2),
     };
 
-    setAlimentos7(dietaValores);
-    setearAlimentos(dietaValores, 7);
+    setAlimentos1(dietaValores);
+    setearAlimentos(dietaValores, 1);
 
   };
+
+
 
 
 
@@ -88,7 +125,7 @@ export const SelectorAlimentos7 = ({setAlimentos7, setearAlimentos}) => {
             </div>
 
             <div className="d-flex flex-column justify-content-center" >
-                <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}} name="proteinas" value={(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}>{(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}g</p>
+                <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}} name="proteinas" value={(seleccionado.proteinas * (cantidad / (seleccionado.cantidad))).toFixed(2)}>{(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}g</p>
             </div>
 
             <div className="d-flex flex-column justify-content-center">

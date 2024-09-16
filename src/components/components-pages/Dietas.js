@@ -3,7 +3,12 @@ import { activarDieta, agregarDieta, cierraFormularioDieta, eliminarDieta, guard
 
 import { useForm } from '../../hooks/useForm';
 import { useEffect, useRef } from 'react';
-import { CalculadoraDieta } from './informacion-paginas/dietas/CalculadoraDieta';
+import { CalculadoraDesayuno } from './informacion-paginas/dietas/desayuno/CalculadoraDesayuno';
+import { CalculadoraAlmuerzo } from './informacion-paginas/dietas/almuerzo/CalculadoraAlmuerzo';
+import { CalculadoraMerienda } from './informacion-paginas/dietas/merienda/CalculadoraMerienda';
+import { CalculadoraCena } from './informacion-paginas/dietas/cena/CalculadoraCena';
+import { CalculadoraPostWork } from './informacion-paginas/dietas/post-work/CalculadoraPostWork';
+import { CalculadoraSnack } from './informacion-paginas/dietas/snack/CalculadoraSnack';
 /*
 
 const dietaInit = {
@@ -159,27 +164,6 @@ export const Dietas = () => {
     }
 
 
-
-    const proteinasHijo = (e)=>{
-      
-      
-      // handleInputChange(e);
-    }
-    const carbohidratosHijo = (e)=>{
-      
-      
-      // handleInputChange(e);
-    }
-    const grasasHijo = (e)=>{
-      
-      
-      // handleInputChange(e);
-    }
-    const caloriasHijo = (e)=>{
-      
-      
-      // handleInputChange(e);
-    }
     
     
     
@@ -286,72 +270,231 @@ export const Dietas = () => {
                       
                                                       {/* DESAYUNO */}
 
-                      <div className='d-flex justify-content-between'>
-                        <p style={{fontWeight: "bold"}}>Desayuno: </p>
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#desayuno" aria-controls="offcanvasScrolling">
+                          Desayuno                          
+                        </p>
+                        
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
 
                         {/* Boton Calculadora */}
-                        <button className="btn btn-outline color-info p-1 opacity-15" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Calculadora</button>
+                        {/* <button className="btn btn-outline color-info p-1 opacity-15" type="button" data-bs-toggle="offcanvas" data-bs-target="#desayuno" aria-controls="offcanvasScrolling">Calculadora</button> */}
+                        
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
+
+
+
+                        <div className='w-100'>
+                          <input name='desayuno1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno1 : dieta.desayuno1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='desayuno2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno2 : dieta.desayuno2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='desayuno3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno3 : dieta.desayuno3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                        </div> 
                       </div>
 
-                      <div>
-                        <input name='desayuno1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno1 : dieta.desayuno1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='desayuno2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno2 : dieta.desayuno2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='desayuno3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? desayuno3 : dieta.desayuno3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                      </div> 
-
-                                                     {/* CALCULADORA */}
-                      <CalculadoraDieta proteinasHijo = {proteinasHijo} carbohidratosHijo = {carbohidratosHijo} grasasHijo = {grasasHijo} caloriasHijo = {caloriasHijo}  />
+                      
+                      
+                      
                       
 
+                                                      {/* ALMUERZO */}
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#almuerzo" aria-controls="offcanvasScrolling">
+                          Almuerzo                          
+                        </p>
+                        
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
 
-                      <p style={{fontWeight: "bold"}}>Almuerzo: </p>
-                        <input name='almuerzo1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo1 : dieta.almuerzo1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='almuerzo2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo2 : dieta.almuerzo2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='almuerzo3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo3 : dieta.almuerzo3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
 
-
-                      <p style={{fontWeight: "bold"}}>Merienda: </p>
-                        <input name='merienda1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda1 : dieta.merienda1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='merienda2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda2 : dieta.merienda2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='merienda3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda3 : dieta.merienda3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-
-
-                      <p style={{fontWeight: "bold"}}>Cena: </p><p className="text-body-secondary">{dieta.cena}</p>
-                        <input name='cena1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena1 : dieta.cena1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='cena2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena2 : dieta.cena2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='cena3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena3 : dieta.cena3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-
-
-                      <p style={{fontWeight: "bold"}}>PostWork: </p><p className="text-body-secondary">{dieta.postWork}</p>
-                        <input name='postWork1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork1 : dieta.postWork1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='postWork2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork2 : dieta.postWork2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='postWork3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork3 : dieta.postWork3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
+                        <div className='w-100'>
+                          <input name='almuerzo1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo1 : dieta.almuerzo1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='almuerzo2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo2 : dieta.almuerzo2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='almuerzo3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? almuerzo3 : dieta.almuerzo3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                        </div>
+                      </div>
 
 
-                      <p style={{fontWeight: "bold"}}>Snack: </p><p className="text-body-secondary">{dieta.snack}</p>
-                        <input name='snack1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack1 : dieta.snack1} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='snack2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack2 : dieta.snack2} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
-                        <input name='snack3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack3 : dieta.snack3} onChange={handleInputChange}></input>
-                        <hr className='m-0 bg-dark'/>
 
 
+
+
+                                                      {/* MERIENDA */}
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#merienda" aria-controls="offcanvasScrolling">
+                          Merienda                          
+                        </p>
+
+
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
+
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
+
+
+
+                        <div className='w-100'>
+                          <input name='merienda1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda1 : dieta.merienda1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='merienda2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda2 : dieta.merienda2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='merienda3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? merienda3 : dieta.merienda3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                        </div>
+                      </div>
+
+
+
+
+
+
+                                                      {/* CENA */}
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#cena" aria-controls="offcanvasScrolling">
+                          Cena                          
+                        </p>
+
+
+
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
+
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
+                      
+
+                        <div className='w-100'>
+                          <input name='cena1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena1 : dieta.cena1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='cena2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena2 : dieta.cena2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='cena3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? cena3 : dieta.cena3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                        </div>
+
+                      </div>
+
+
+
+
+
+
+                                                      {/* POST WORK */}
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#post-work" aria-controls="offcanvasScrolling">
+                          Post Work                          
+                        </p>
+                      
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
+
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
+
+
+                        <div className='w-100'>
+                          <input name='postWork1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork1 : dieta.postWork1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='postWork2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork2 : dieta.postWork2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='postWork3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? postWork3 : dieta.postWork3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+
+                        </div>
+
+
+                      </div>
+
+
+
+
+                                                      {/* SNACK */}
+                      <div className='d-flex mb-4'>
+                        <p style={{writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize:"10px", letterSpacing: "2px"}} className='text-center p-0 m-0 text-uppercase fw-bolder text-body-tertiary'  type="button" data-bs-toggle="offcanvas" data-bs-target="#snack" aria-controls="offcanvasScrolling">
+                          Snack                         
+                        </p>
+                      
+
+                        {/* VIÑETA VERTICAL */}
+                        <div style={{width:"3px"}} className='bg-dark rounded-1 opacity-50'>
+                        </div>
+
+                        {/* PUNTOS */}
+                        <div style={{width:"12px", position:"relative", color:"#a5ffb9", fontSize:"20px"}}>
+                          <ul style={{position:"absolute", left:"22px", top:"0px", margin:"0", padding:"0"}}>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                            <li className='mb-0 p-0'></li>
+                          </ul>
+                        </div>
+                      
+
+                        <div className='w-100'>
+                          <input name='snack1' className="text-body-secondary d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack1 : dieta.snack1} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='snack2' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack2 : dieta.snack2} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                          <input name='snack3' className="d-block w-100 focus-ring" style={{border: "none", marginBottom: "4px"}} value={(dieta.id === dietaActiva.id) ? snack3 : dieta.snack3} onChange={handleInputChange}></input>
+                          <hr className='m-0 bg-dark'/>
+                        </div>
+
+                      </div>
+
+
+
+                      {/* CALCULADORAS */}                      
+                                            
+                      <CalculadoraDesayuno />
+                      <CalculadoraAlmuerzo />
+                      <CalculadoraMerienda />
+                      <CalculadoraCena />
+                      <CalculadoraPostWork />
+                      <CalculadoraSnack />
 
 
                           

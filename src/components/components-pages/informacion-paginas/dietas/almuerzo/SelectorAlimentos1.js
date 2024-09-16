@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { alimentos } from './arreglos';
+import { alimentos } from '../arreglos';
 import { useEffect, useState } from 'react';
-import { actualizarProteina } from '../../../../actions/dietas';
+import { actualizarProteina } from '../../../../../actions/dietas';
 
 
 

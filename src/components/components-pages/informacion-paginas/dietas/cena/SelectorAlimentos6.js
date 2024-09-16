@@ -1,9 +1,9 @@
-import { alimentos } from './arreglos';
+import { alimentos } from '../arreglos';
 import { useState } from 'react';
 
 
 
-export const SelectorAlimentos4 = ({setAlimentos4, setearAlimentos}) => {
+export const SelectorAlimentos6 = ({setAlimentos6, setearAlimentos}) => {
 
 
   const [seleccionado, setSeleccionado] = useState(alimentos[0]);
@@ -37,8 +37,8 @@ export const SelectorAlimentos4 = ({setAlimentos4, setearAlimentos}) => {
       grasas: (seleccionado.grasas * factor).toFixed(2),
     };
 
-    setAlimentos4(dietaValores);
-    setearAlimentos(dietaValores, 4);
+    setAlimentos6(dietaValores);
+    setearAlimentos(dietaValores, 6);
 
   };
 

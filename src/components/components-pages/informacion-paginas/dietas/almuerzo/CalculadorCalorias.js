@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { alimentos } from './arreglos';
+import { alimentos } from '../arreglos';
 import { useDispatch, useSelector } from 'react-redux';
-import { actualizarProteina } from '../../../../actions/dietas';
+import { actualizarProteina } from '../../../../../actions/dietas';
 import { SelectorAlimentos1 } from './SelectorAlimentos1';
 import { SelectorAlimentos2 } from './SelectorAlimentos2';
 import { SelectorAlimentos3 } from './SelectorAlimentos3';
@@ -21,7 +21,7 @@ const initialArray = {
 
 
 
-export const CalorieCalculator = ({proteinasHijo, carbohidratosHijo, grasasHijo, caloriasHijo}) => {
+export const CalorieCalculator = () => {
 
   const dietaActiva = useSelector((store)=>{return store.dietas.active});
 
@@ -298,63 +298,3 @@ export const CalorieCalculator = ({proteinasHijo, carbohidratosHijo, grasasHijo,
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   return (
-//     <div className="container d-flex justify-content-center mt-5 mx-0 p-0">
-//       <div className="card" style={{ width: '100%' }}>
-//         <div className="card-body p-0">
-//           <h5 className="card-title">Calculadora de Calorías</h5>
-
-
-//           <label className="form-label">
-//             Selecciona un alimento:
-//             <select className="form-select" onChange={handleSelectChange}>
-//               {alimentos.map((alimento) => (
-//                 <option key={alimento.nombre} value={alimento.nombre}>
-//                   {alimento.nombre}
-//                 </option>
-//               ))}
-//             </select>
-//           </label>
-
-
-
-//           <label className="form-label">
-//             Cantidad en {seleccionado.unidad}:
-//             <input
-//               type="number"
-//               className="form-control"
-//               value={cantidad}
-//               onChange={handleInputChange}
-//             />
-//           </label>
-
-
-//           <h6>Calorías: {totales.calorias}</h6>
-//           <h6>Proteínas: {totales.proteinas} g</h6>
-//           <h6>Carbohidratos: {totales.carbohidratos} g</h6>
-//           <h6>Grasas: {totales.grasas} g</h6>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
