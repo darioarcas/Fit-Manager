@@ -3,17 +3,19 @@ import { BarTool } from './informacion-paginas/rutinas/BarTool'
 
 export const Rutinas = () => {
   return (
-    <div className='d-flex justify-content-center'>
+    <div className='d-flex justify-content-center positon-relative'>
 
-      <div className='w-75 text-whitetable-responsive'>
+      <div className='w-60 mt-5'>
 
-        <table class="table table-dark table-sm">
-          <thead>
+        <table class="table align-middle table-borderless table-sm">
+          <thead >
             <tr>
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Ejercicio</th>
+              <th scope="col">IMG</th>
+              <th scope="col">Video</th>
+              <th scope="col">Pausa</th>
+              <th scope="col">Ejecucion</th>
             </tr>
           </thead>
           <tbody>
@@ -37,10 +39,12 @@ export const Rutinas = () => {
           </tbody>
         </table>
         
-        <BarTool/>
         
       </div>
 
+      <div className='position-fixed bottom-0 bg-black'>
+        <BarTool/>
+      </div>
     </div>
   )
 }
