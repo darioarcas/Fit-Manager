@@ -28,6 +28,7 @@ export const Rutinas = () => {
 
 
   const [seleccionado, setSeleccionado] = useState(ejercicios[0]);
+  const [imgs, setImgs] = useState("");
   const [rutina, setRutina] = useState(rutinaInit);
   const [numeroRutinas, setNumeroRutinas] = useState(rutina.length)
 
@@ -36,26 +37,40 @@ export const Rutinas = () => {
   const handleSelectChange = (e) => {
     // Devuelve el primer elemento del array que cumple con la condición
     const alimentoSeleccionado = ejercicios.find(a => a.ejercicio === e.target.value);
+    // console.log(alimentoSeleccionado.img);
     setSeleccionado(alimentoSeleccionado);
+    img(alimentoSeleccionado);
   };
+
+
+  const img = (e)=>{
+    
+    setImgs(e.img);
+  }
 
   useEffect(() => {
     setNumeroRutinas(rutina.length);
   }, [rutina])
   
 
-  const botonAgregar = ()=>{
-    setRutina( [...rutina ,
-      {
-      ejercicio: "",
-      img: "",
-      video: ""
-    }]);
+  const botonAgregar = (e)=>{
 
-    console.log(rutina.length);
+    if(rutina.length <= 6){
+
+        console.log(e.target.value);
+        setRutina( [...rutina ,
+          {
+          ejercicio: "",
+          img: "",
+          video: ""
+        }]);
+    
+        console.log(rutina.length);
+    }
   }
 
   const botonQuitar = ()=>{
+
     setRutina( rutina.slice(0, rutina.length - 1));
     console.log(rutina.length);
   }
@@ -65,7 +80,7 @@ export const Rutinas = () => {
   return (
     <div className='d-flex justify-content-center positon-relative'>
 
-      <div className='w-60 mt-5'>
+      <div className='mt-5' style={{width:"95%"}}>
 
         <table class="table align-middle table-borderless table-sm">
           <thead >
@@ -89,7 +104,7 @@ export const Rutinas = () => {
 
                     <td style={{width:"20%"}}>
                       {/* El select debe tener el value guardado del objeto en la base de datos value={el alimento de la base de datos} */}
-                      <select id="alimento" onChange={handleSelectChange}  className="me-2 fs-6 rounded" style={{height:"30px", color:"black", width:"100%", border:"none"}}>
+                      <select id="alimento" onChange={handleSelectChange}  value={seleccionado.ejercicio} className="me-2 fs-6 rounded" style={{height:"30px", color:"black", width:"100%", border:"none"}}>
                         {ejercicios.map((elemento) => (
                           <option key={elemento.ejercicio} value={elemento.ejercicio}>
                             {elemento.ejercicio}
@@ -99,9 +114,9 @@ export const Rutinas = () => {
                     </td>
 
 
-                    <td>
-                      <div style={{backgroundSize: 'cover', backgroundImage: `url(${seleccionado.img})`}}>
-                        Holaaaaaaa                  
+                    <td style={{width:"20%"}}>
+                      <div style={{backgroundSize: 'cover', backgroundImage: `url(${imgs})`}}>
+                      {imgs && <iframe src={imgs} width="100%" height="40px" allow="autoplay"></iframe>}
                       </div>
                     </td>
 
