@@ -209,25 +209,13 @@ export const guardarDieta = (dieta)=>{
   
   
 
-  /////////////////////      CALCULADORA
+
+
 
   
-
-
+  /////////////////////      CALCULADORA
 
   export const actualizarProteina = (id, dietaValores, dietaActiva)=>{
-
-    // const dieta = {
-    //   ...dietaActiva,
-    //   proteinas: dietaValores.proteinas,
-    //   carbohidratos: dietaValores.carbohidratos,
-    //   calorias: dietaValores.calorias,
-    //   grasas: dietaValores.grasas
-    // }
-
-    // return (dispatch)=>{
-    //   dispatch(activarDieta(id, dieta));
-    // }
 
     return{
       type: types.dietaProteinaActualizar,

@@ -36,7 +36,7 @@ export const types = {
     dietaUpdate: '[Dieta] Update dieta',
     dietaDelete: '[Dieta] Delete dieta',
     dietaLogoutCleaning: '[Dieta] Logout Cleaning',
-    dietaCerrarFormulario: '[Dieta] Cerrar Formulario',
+    dietaCerrarFormulario: '[Dieta] Close Formulario',
 
 
 
@@ -45,4 +45,14 @@ export const types = {
     dietaCarbohidratoActualizar: '[Calculadora] Actualiza Carbohidrato',
     dietaCaloriaActualizar: '[Calculadora] Actualiza Caloria',
     dietaGrasaActualizar: '[Calculadora] Actualiza Grasa',
+
+
+
+    rutinaNew: '[Rutina] New rutina',
+    rutinaActive: '[Rutina] Set active rutina',
+    rutinaLoad: '[Rutina] Load rutina',
+    rutinaUpdate: '[Rutina] Update rutina',
+    rutinaDelete: '[Rutina] Delete rutina',
+    rutinaLogoutCleaning: '[Rutina] Logout Cleaning',
+    rutinaCerrarFormulario: '[Rutina] Close Formulario',
 }

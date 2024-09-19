@@ -4,7 +4,17 @@
 
 
 
-export const BarTool = ({botonAgregar, botonQuitar, numeroRutinas}) => {
+export const BarTool = ({
+    botonAgregar,
+    botonQuitar,
+    numeroEjercicios,
+    activarEstaRutina,
+    guardar,
+    numeroSesionActiva
+}) => {
+
+
+
   return (
     <div className="text-white d-flex justify-content-between" style={{width:"90%"}}>
         
@@ -51,7 +61,7 @@ export const BarTool = ({botonAgregar, botonQuitar, numeroRutinas}) => {
                         justifyContent:"center"                   
                     }} 
                 >
-                    {numeroRutinas}                    
+                    {numeroEjercicios}                    
                 </p>
                 <div 
                     style={{
@@ -72,6 +82,11 @@ export const BarTool = ({botonAgregar, botonQuitar, numeroRutinas}) => {
             </div>
 
         </div>
+
+
+
+
+
         <div>
             <p>SESIONES</p>
             <select style={{border:"none", width:"100%"}}>
@@ -83,11 +98,105 @@ export const BarTool = ({botonAgregar, botonQuitar, numeroRutinas}) => {
                 <option>6</option>
             </select>
         </div>
+
+
+
+
+
         <div>
             <p>CARGAR RUTINA</p>
             <select style={{border:"none", width:"100%"}}>
                 <option></option>
             </select>
+        </div>
+        
+        
+        
+        
+        <div style={{
+                backgroundColor:"#59d9df",
+                padding:"5px", width:"10%",
+                border:"solid white 4px",
+                borderRadius:"5px",
+                height:"40%",
+                cursor:"pointer",            
+
+            }}
+            onClick={activarEstaRutina}
+        >
+            <p style={{textAlign:"center", margin:"0 auto"}}>ACTIVAR RUTINA</p>
+        </div>
+        
+        
+        
+        
+        <div style={{
+                backgroundColor:"#59d9df",
+                padding:"5px", width:"10%",
+                border:"solid white 4px",
+                borderRadius:"5px",
+                height:"40%",
+                cursor:"pointer",            
+
+            }}
+            onClick={guardar}
+        >
+            <p style={{textAlign:"center", margin:"0 auto"}}>GUARDAR</p>
+        </div>
+
+
+
+
+
+
+        <div style={{
+                backgroundColor:"#59d9df",
+                padding:"5px",
+                width:"5%",
+                border:"solid white 4px",
+                borderRadius:"5px",
+                height:"40%",
+                cursor:"pointer",            
+
+            }}
+            onClick={()=>{return numeroSesionActiva(1)}}
+        >
+            <p style={{textAlign:"center", margin:"0 auto"}}>S1</p>
+        </div>
+        
+        
+        
+        <div style={{
+                backgroundColor:"#59d9df",
+                padding:"5px",
+                width:"5%",
+                border:"solid white 4px",
+                borderRadius:"5px",
+                height:"40%",
+                cursor:"pointer",            
+
+            }}
+            onClick={()=>{return numeroSesionActiva(2)}}
+        >
+            <p style={{textAlign:"center", margin:"0 auto"}}>S2</p>
+        </div>
+        
+        
+        
+        
+        <div style={{
+                backgroundColor:"#59d9df",
+                padding:"5px",
+                width:"5%",
+                border:"solid white 4px",
+                borderRadius:"5px",
+                height:"40%",
+                cursor:"pointer",            
+
+            }}
+            onClick={()=>{return numeroSesionActiva(3)}}
+        >
+            <p style={{textAlign:"center", margin:"0 auto"}}>S3</p>
         </div>
 
         
