@@ -104,7 +104,7 @@ export const Rutinas = () => {
     
     setEjercicioSeleccionado(nuevoarreglo);
 
-    // setRutinaActiva();
+    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjeto(nuevoarreglo)})
 
   };
   
