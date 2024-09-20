@@ -90,12 +90,11 @@ export const empezarCargaRutinas = (uid)=>{
 
   export const activarRutina = (id, rutina)=>{
     
-    console.log(rutina);
     return{
       
       type: types.rutinaActive,
       payload: {
-        id,
+        ...id,
         rutina
       }
 

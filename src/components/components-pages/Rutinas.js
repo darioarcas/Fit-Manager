@@ -3,6 +3,8 @@ import { BarTool } from './informacion-paginas/rutinas/BarTool';
 import { ejercicios } from './informacion-paginas/rutinas/RutinasArreglos';
 import { activarRutina, agregarRutina } from '../../actions/rutina';
 import { useDispatch } from 'react-redux';
+import { deArregloAObjetoHelper } from '../../helpers/deArregloAObjeto';
+import App from './CalculadoraIC';
 
 
 
@@ -103,8 +105,9 @@ export const Rutinas = () => {
     
     
     setEjercicioSeleccionado(nuevoarreglo);
-
-    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjeto(nuevoarreglo)})
+    
+    // Actualizamos rutinaActiva
+    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper(nuevoarreglo)})
 
   };
   
@@ -138,7 +141,7 @@ export const Rutinas = () => {
         console.log("ejercicioSeleccionado: ", ejercicioSeleccionado);
 
         // Actualizamos rutinaActiva
-        setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjeto([...ejercicioSeleccionado ,
+        setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper([...ejercicioSeleccionado ,
           {
           ejercicio: "un ejercicio cualquiera",
           img: "",
@@ -152,22 +155,14 @@ export const Rutinas = () => {
 
   useEffect(() => {
     console.log("nuevaRutinaActiva: ", rutinaActiva);
-  }, [ejercicioSeleccionado])
+    activarEstaRutina();
+  }, [rutinaActiva])
   
 
 
 
 
-  const deArregloAObjeto = (arreglo)=>{
-    // Convertimos el arreglo en un objeto
-    const ejercicioObject = arreglo.reduce((accumulator, user, index) => {
-      // Usamos una clave personalizada
-      const clave = `ejercicio${index + 1}`;
-      accumulator[clave] = user;
-      return accumulator; // Retornamos el acumulador para la siguiente iteración
-    }, {}); // Inicializamos el acumulador como un objeto vacío
-    return ejercicioObject;
-  }
+
 
 
   // Agregar Nueva Rutina
@@ -181,7 +176,7 @@ export const Rutinas = () => {
   const botonQuitar = ()=>{
 
     setEjercicioSeleccionado( ejercicioSeleccionado.slice(0, ejercicioSeleccionado.length - 1));
-    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjeto(ejercicioSeleccionado.slice(0, ejercicioSeleccionado.length - 1))});
+    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper(ejercicioSeleccionado.slice(0, ejercicioSeleccionado.length - 1))});
 
   }
 
@@ -189,7 +184,7 @@ export const Rutinas = () => {
   const activarEstaRutina = ()=>{
     // console.log("Rutina Activa", ejercicioSeleccionado[0]);
 
-    dispatch(activarRutina("esto es un id", ejercicioSeleccionado[0]));
+    dispatch(activarRutina(rutinaActiva.id, rutinaActiva));
   }
   
 
@@ -205,7 +200,7 @@ export const Rutinas = () => {
   }
 
   return (
-    <div className='d-flex justify-content-center positon-relative'>
+    <div className='d-flex flex-column justify-content-center positon-relative'>
 
 
 
@@ -302,6 +297,11 @@ export const Rutinas = () => {
           numeroSesionActiva={numeroSesionActiva}
         />
       </div>
+
+
+
+
+      <App />
     </div>
   )
 }

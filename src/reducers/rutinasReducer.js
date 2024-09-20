@@ -59,7 +59,7 @@ export const rutinasReducer = (state=initialState, action) => {
 
         case types.rutinaActive:
 
-            return action.payload;
+            return {... state, active: action.payload};
                 
             
     
