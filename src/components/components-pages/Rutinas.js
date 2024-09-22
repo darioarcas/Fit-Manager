@@ -149,7 +149,20 @@ export const Rutinas = () => {
 
 
 
-  const botonAgregar = (cantidadAgregar)=>{
+
+  const selectorSesiones = (cantidadSesiones)=>{
+
+  }
+
+
+
+
+
+
+
+
+
+  const selectorEjercicios = (cantidadEjercicios)=>{
 
 
     const largoSesion1Activa = Object.values(rutinaActiva.sesion1).length;
@@ -163,29 +176,17 @@ export const Rutinas = () => {
 
     
     // Agregamos objetos
-    if(largoSesion1Activa < cantidadAgregar){     
+    if(largoSesion1Activa < cantidadEjercicios){     
       
-      const arregloInicialSesion1 = sumarObjetos(cantidadAgregar, largoSesion1Activa);
-      const arregloInicialSesion2 = sumarObjetos(cantidadAgregar, largoSesion2Activa);
-      const arregloInicialSesion3 = sumarObjetos(cantidadAgregar, largoSesion3Activa);
-      // const arregloInicialSesion4 = sumarObjetos(cantidadAgregar, largoSesion4Activa);
-      // const arregloInicialSesion5 = sumarObjetos(cantidadAgregar, largoSesion5Activa);
-      // const arregloInicialSesion6 = sumarObjetos(cantidadAgregar, largoSesion6Activa);
-      // const arregloInicialSesion7 = sumarObjetos(cantidadAgregar, largoSesion7Activa);
+      const arregloInicialSesion1 = sumarObjetos(cantidadEjercicios, largoSesion1Activa);
+      const arregloInicialSesion2 = sumarObjetos(cantidadEjercicios, largoSesion2Activa);
+      const arregloInicialSesion3 = sumarObjetos(cantidadEjercicios, largoSesion3Activa);
+      // const arregloInicialSesion4 = sumarObjetos(cantidadEjercicios, largoSesion4Activa);
+      // const arregloInicialSesion5 = sumarObjetos(cantidadEjercicios, largoSesion5Activa);
+      // const arregloInicialSesion6 = sumarObjetos(cantidadEjercicios, largoSesion6Activa);
+      // const arregloInicialSesion7 = sumarObjetos(cantidadEjercicios, largoSesion7Activa);
 
 
-
-      // // Guardamos la cantidad de objetos en un arreglo
-      // for (let i = 0; i < (cantidadAgregar - largoSesion1Activa); i++) {
-      //   const objetoAgregado = {
-      //     ejercicio: "un ejercicio cualquiera",
-      //     img: "",
-      //     video: "",
-      //     pausa: "",
-      //     ejecucion: ""
-      //   }
-      //   arregloInicial.push(objetoAgregado);        
-      // }
       const sesionesNuevas1 = [...Object.values(rutinaActiva.sesion1)];
       const sesionesNuevas2 = [...Object.values(rutinaActiva.sesion2)];
       const sesionesNuevas3 = [...Object.values(rutinaActiva.sesion3)];
@@ -193,6 +194,9 @@ export const Rutinas = () => {
       const sesionesNuevas5 = [...Object.values(rutinaActiva.sesion3)];
       const sesionesNuevas6 = [...Object.values(rutinaActiva.sesion3)];
       const sesionesNuevas7 = [...Object.values(rutinaActiva.sesion3)];
+
+
+
       // Fusionamos los arreglos nuevos con los viejos
       arregloInicialSesion1.map((objeto, index)=>{sesionesNuevas1.push(arregloInicialSesion1[index]);})
       arregloInicialSesion2.map((objeto, index)=>{sesionesNuevas2.push(arregloInicialSesion2[index]);})
@@ -226,17 +230,17 @@ export const Rutinas = () => {
 
 
     // Quitamos objetos
-    else if (largoSesion1Activa > cantidadAgregar){
+    else if (largoSesion1Activa > cantidadEjercicios){
 
 
       // Eliminar los últimos objetos
-      const sesiones1Nuevas = [...Object.values(rutinaActiva.sesion1)].reverse().slice((largoSesion1Activa - cantidadAgregar));
-      const sesiones2Nuevas = [...Object.values(rutinaActiva.sesion2)].reverse().slice((largoSesion2Activa - cantidadAgregar));
-      const sesiones3Nuevas = [...Object.values(rutinaActiva.sesion3)].reverse().slice((largoSesion3Activa - cantidadAgregar));
-      // const sesiones4Nuevas = [...Object.values(rutinaActiva.sesion4)].reverse().slice((largoSesion4Activa - cantidadAgregar));
-      // const sesiones5Nuevas = [...Object.values(rutinaActiva.sesion5)].reverse().slice((largoSesion5Activa - cantidadAgregar));
-      // const sesiones6Nuevas = [...Object.values(rutinaActiva.sesion6)].reverse().slice((largoSesion6Activa - cantidadAgregar));
-      // const sesiones7Nuevas = [...Object.values(rutinaActiva.sesion7)].reverse().slice((largoSesion7Activa - cantidadAgregar));
+      const sesiones1Nuevas = [...Object.values(rutinaActiva.sesion1)].reverse().slice((largoSesion1Activa - cantidadEjercicios));
+      const sesiones2Nuevas = [...Object.values(rutinaActiva.sesion2)].reverse().slice((largoSesion2Activa - cantidadEjercicios));
+      const sesiones3Nuevas = [...Object.values(rutinaActiva.sesion3)].reverse().slice((largoSesion3Activa - cantidadEjercicios));
+      // const sesiones4Nuevas = [...Object.values(rutinaActiva.sesion4)].reverse().slice((largoSesion4Activa - cantidadEjercicios));
+      // const sesiones5Nuevas = [...Object.values(rutinaActiva.sesion5)].reverse().slice((largoSesion5Activa - cantidadEjercicios));
+      // const sesiones6Nuevas = [...Object.values(rutinaActiva.sesion6)].reverse().slice((largoSesion6Activa - cantidadEjercicios));
+      // const sesiones7Nuevas = [...Object.values(rutinaActiva.sesion7)].reverse().slice((largoSesion7Activa - cantidadEjercicios));
       sesiones1Nuevas.reverse()
       sesiones2Nuevas.reverse()
       sesiones3Nuevas.reverse()
@@ -259,10 +263,10 @@ export const Rutinas = () => {
 
 
 
-  const sumarObjetos = (cantidadAgregar, largoSesionActiva)=>{
+  const sumarObjetos = (cantidadEjercicios, largoSesionActiva)=>{
     const arregloInicial = [];
     // Guardamos la cantidad de objetos en un arreglo
-    for (let i = 0; i < (cantidadAgregar - largoSesionActiva); i++) {
+    for (let i = 0; i < (cantidadEjercicios - largoSesionActiva); i++) {
       const objetoAgregado = {
         ejercicio: "un ejercicio cualquiera",
         img: "",
@@ -313,16 +317,6 @@ export const Rutinas = () => {
   }
 
 
-
-  const botonQuitar = ()=>{
-
-    setEjercicioSeleccionado( ejercicioSeleccionado.slice(0, ejercicioSeleccionado.length - 1));
-
-    const sesion1nueva = [...Object.values(rutinaActiva.sesion1)];
-
-    setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper(sesion1nueva.slice(0, sesion1nueva.length - 1), 'ejercicio')});
-
-  }
 
 
   
@@ -470,8 +464,7 @@ export const Rutinas = () => {
 
       <div className='position-fixed bottom-0 bg-black w-100 px-4 py-1 pb-4' style={{opacity:"30%"}}>
         <BarTool 
-          botonAgregar={botonAgregar} 
-          botonQuitar={botonQuitar} 
+          selectorEjercicios={selectorEjercicios}
           numeroEjercicios={numeroEjercicios}
           activarEstaRutina={activarEstaRutina}
           guardar={guardar}

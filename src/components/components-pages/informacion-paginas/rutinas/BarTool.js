@@ -5,8 +5,7 @@
 
 
 export const BarTool = ({
-    botonAgregar,
-    botonQuitar,
+    selectorEjercicios,
     numeroEjercicios,
     activarEstaRutina,
     guardar,
@@ -21,7 +20,7 @@ export const BarTool = ({
         
         <div>
             <p>EJERCICIOS</p>
-            <select style={{border:"none", width:"100%"}} value={numeroEjercicios} onChange={(e)=>{botonAgregar(e.target.value)}}>
+            <select style={{border:"none", width:"100%"}} value={numeroEjercicios} onChange={(e)=>{selectorEjercicios(e.target.value)}}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -50,7 +49,7 @@ export const BarTool = ({
                         flexDirection:"column",
                         justifyContent:"center"                   
                     }} 
-                    onClick={botonAgregar}
+                    onClick={selectorEjercicios}
                 >
                     <h3 className="p-0 m-0">+</h3>
                 </div>
