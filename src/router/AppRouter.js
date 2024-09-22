@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
 import { empezarCargaAlumnos} from "../actions/alumno";
 import { empezarCargaDietas } from "../actions/dietas";
+import { empezarCargaRutinas } from "../actions/rutina";
 
 
 export const AppRouter = () => {
@@ -44,6 +45,7 @@ export const AppRouter = () => {
                 // // llamamos a la accion y de ahi se envia al store
                 dispatch(empezarCargaAlumnos(user.uid));
                 dispatch(empezarCargaDietas(user.uid));
+                dispatch(empezarCargaRutinas(user.uid));
 
         }else{
 

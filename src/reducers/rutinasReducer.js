@@ -3,24 +3,26 @@ import { types } from "../types/types";
 
 // Rutinas
 const initialState = {
-    rutina1:{
-        id:"",
-        nombre:"Nombre rutina",
-        sesion1:{
-            ejercicio1:{
-                ejercicio: "",
-                img: "",
-                video: "",
-                pausa: "",
-                ejecucion: ""
-            }
-        },
-        sesion2:{},
-        sesion3:{},
-        sesion4:{},
-        sesion5:{},
-        sesion6:{},
-        sesion7:{},
+    rutinas:{
+        rutina1:{
+            id:"",
+            nombre:"Nombre rutina",
+            sesion1:{
+                ejercicio1:{
+                    ejercicio: "",
+                    img: "",
+                    video: "",
+                    pausa: "",
+                    ejecucion: ""
+                }
+            },
+            sesion2:{},
+            sesion3:{},
+            sesion4:{},
+            sesion5:{},
+            sesion6:{},
+            sesion7:{},
+    },
     },
     active:{
         rutina:{
@@ -60,6 +62,15 @@ export const rutinasReducer = (state=initialState, action) => {
         case types.rutinaActive:
 
             return {... state, active: action.payload};
+
+
+
+
+        case types.rutinaLoad:
+            return{
+                ...state,
+                rutinas: action.payload
+            }
                 
             
     

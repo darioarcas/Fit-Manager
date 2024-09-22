@@ -21,14 +21,21 @@ export const BarTool = ({
         
         <div>
             <p>EJERCICIOS</p>
-            {/* <select style={{border:"none", width:"100%"}} onChange={botonAgregar}>
+            <select style={{border:"none", width:"100%"}} value={numeroEjercicios} onChange={(e)=>{botonAgregar(e.target.value)}}>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
                 <option value={4}>4</option>
                 <option value={5}>5</option>
                 <option value={6}>6</option>
-            </select> */}
+                <option value={7}>7</option>
+            </select>
+
+
+
+
+
+{/* 
 
             <div className="d-flex" style={{justifyContent:"space-between"}}>
                 <div 
@@ -79,7 +86,9 @@ export const BarTool = ({
                 >
                     <h3 className="p-0 m-0">-</h3>
                 </div>
-            </div>
+            </div> */}
+
+
 
         </div>
 
@@ -147,57 +156,6 @@ export const BarTool = ({
 
 
 
-
-
-        <div style={{
-                backgroundColor:"#59d9df",
-                padding:"5px",
-                width:"5%",
-                border:"solid white 4px",
-                borderRadius:"5px",
-                height:"40%",
-                cursor:"pointer",            
-
-            }}
-            onClick={()=>{return numeroSesionActiva(1)}}
-        >
-            <p style={{textAlign:"center", margin:"0 auto"}}>S1</p>
-        </div>
-        
-        
-        
-        <div style={{
-                backgroundColor:"#59d9df",
-                padding:"5px",
-                width:"5%",
-                border:"solid white 4px",
-                borderRadius:"5px",
-                height:"40%",
-                cursor:"pointer",            
-
-            }}
-            onClick={()=>{return numeroSesionActiva(2)}}
-        >
-            <p style={{textAlign:"center", margin:"0 auto"}}>S2</p>
-        </div>
-        
-        
-        
-        
-        <div style={{
-                backgroundColor:"#59d9df",
-                padding:"5px",
-                width:"5%",
-                border:"solid white 4px",
-                borderRadius:"5px",
-                height:"40%",
-                cursor:"pointer",            
-
-            }}
-            onClick={()=>{return numeroSesionActiva(3)}}
-        >
-            <p style={{textAlign:"center", margin:"0 auto"}}>S3</p>
-        </div>
 
         
     </div>

@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { cargarRutinas } from "../helpers/cargarRutinas";
 import { types } from "../types/types";
+import { deArregloAObjetoHelper } from "../helpers/deArregloAObjeto";
 
 
 
@@ -11,37 +12,37 @@ import { types } from "../types/types";
 
 
 
-export const agregarRutina = () => {
+export const agregarRutina = (nuevaRutina) => {
     // MiddleWare para agregar a la base de datos la Rutina
     return async (dispatch, getState)=>{
   
         const uid = getState().auth.uid;
 
-        const nuevaRutina = {
-          rutina:{
-              nombre:"Nombre rutina",
-              sesion1:{
-                  ejercicio1:{
-                      ejercicio: "",
-                      img: "",
-                      video: "",
-                      pausa: "",
-                      ejecucion: ""
-                  }
-              },
-              sesion2:{},
-              sesion3:{},
-              sesion4:{},
-              sesion5:{},
-              sesion6:{},
-              sesion7:{},
-          }
-        }
+        // const nuevaRutina = {
+        //   rutina:{
+        //       nombre:"Nombre rutina",
+        //       sesion1:{
+        //           ejercicio1:{
+        //               ejercicio: "",
+        //               img: "",
+        //               video: "",
+        //               pausa: "",
+        //               ejecucion: ""
+        //           }
+        //       },
+        //       sesion2:{},
+        //       sesion3:{},
+        //       sesion4:{},
+        //       sesion5:{},
+        //       sesion6:{},
+        //       sesion7:{},
+        //   }
+        // }
     
     
         const doc = await db.collection(`${uid}/rutinas-usuario/rutina`).add(nuevaRutina);
-    //    dispatch(activarRutina(doc.id, nuevaRutina));
-       // dispatch(agregarNuevaRutinaReducer(doc.id, nuevaRutina));
+        dispatch(activarRutina(doc.id, nuevaRutina));
+       dispatch(agregarNuevaRutinaReducer(doc.id, nuevaRutina));
     }
   }
 
@@ -67,9 +68,11 @@ export const empezarCargaRutinas = (uid)=>{
     return async(dispatch)=>{
   
         // Cargamos las notas del usuario
+        // llamada a la db para extraer las rutinas
         const rutinas = await cargarRutinas(uid);
         // llamamos a la accion y la enviamos al store
-        dispatch(setearRutinasReducer(rutinas));
+        dispatch(setearRutinasReducer(deArregloAObjetoHelper(rutinas, 'rutina')));
+        // dispatch(setearRutinasReducer(rutinas));
     }
   }
   
@@ -79,7 +82,7 @@ export const empezarCargaRutinas = (uid)=>{
   export const setearRutinasReducer = (rutinas)=>{
     return {
         type: types.rutinaLoad,
-        payload: [...rutinas]
+        payload: {...rutinas}
     }
   }
 
@@ -94,8 +97,8 @@ export const empezarCargaRutinas = (uid)=>{
       
       type: types.rutinaActive,
       payload: {
-        ...id,
-        rutina
+        ...rutina,
+        id,
       }
 
       
