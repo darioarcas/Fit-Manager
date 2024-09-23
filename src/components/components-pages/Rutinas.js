@@ -84,20 +84,20 @@ export const Rutinas = () => {
   
   
   // ejercicioSeleccionado contiene todos los ejercicios de una sesion
-  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(Object.values(rutinas.rutina2.sesion1));
+  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(Object.values(rutinas.rutina1.sesion1));
 
   
   
   
   // La rutinaActiva se tomaria desde un useSelector para tomar el objeto cargado(por un action) desde la db
-  const [rutinaActiva, setRutinaActiva] = useState(rutinas.rutina2);
+  const [rutinaActiva, setRutinaActiva] = useState(rutinas.rutina1);
   // console.log("Rutina Activa Primero: ", rutinas);
   
   const [numeroEjercicios, setNumeroEjercicios] = useState(Object.values(rutinaActiva.sesion1).length);
 
 
   const [auxiliar, setAuxiliar] = useState([]);
-  const [sesion, setSesion] = useState({sesion1:1, sesion2:2, sesion3:3, sesion4:4, sesion5:5, sesion6:6, sesion7:7});
+  const [numeroSesiones, setNumeroSesiones] = useState(Object.values(rutinaActiva).length - 2);
 
   const dispatch = useDispatch();
 
@@ -142,6 +142,7 @@ export const Rutinas = () => {
 
   useEffect(() => {
     setNumeroEjercicios(Object.values(rutinaActiva.sesion1).length);
+    setNumeroSesiones(Object.values(rutinaActiva).length - 2)
   }, [rutinaActiva]);
   
 
@@ -152,6 +153,91 @@ export const Rutinas = () => {
 
   const selectorSesiones = (cantidadSesiones)=>{
 
+    
+    const largoRutinaActiva = Object.values(rutinaActiva).length - 2;
+    
+    // Sumamos sesiones
+    if(largoRutinaActiva < cantidadSesiones){
+
+      const arregloInicial = [];
+
+      const arregloDeObjetos = sumarObjetos(numeroEjercicios, 0);
+
+      // Guardamos la cantidad de objetos en un arreglo
+      for (let i = (largoRutinaActiva + 1); i <= (cantidadSesiones); i++) {
+        arregloInicial.push(deArregloAObjetoHelper(arregloDeObjetos, 'ejercicio'));        
+      }
+
+
+      const rutinaNueva = [];
+      // Descartamos el id y el nombre
+      Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+        if(clave !== 'id' && clave !== 'nombre' ){
+          rutinaNueva.push(valor);
+        }
+      });
+      
+      
+      const id = [];
+      Object.entries(rutinaActiva).map(([clave, valor])=>{
+        if(clave === 'id'){
+          id.push(valor);
+        }
+      });
+      const nombre = [];
+      Object.entries(rutinaActiva).map(([clave, valor])=>{
+        if(clave === 'nombre'){
+          nombre.push(valor);
+        }
+      });
+      arregloInicial.map((objeto, index)=>{rutinaNueva.push(arregloInicial[index]);})
+
+      setRutinaActiva(deArregloAObjetoHelper(rutinaNueva, 'sesion'));
+      setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, id: id[0]}));
+      setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, nombre: nombre[0]}));
+    }
+
+
+
+
+    
+    // Quitamos Sesiones
+    else if(largoRutinaActiva > cantidadSesiones){
+      // Eliminar los últimos objetos
+      const rutinaNueva = [];
+      // Descartamos el id y el nombre
+      Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+        if(clave !== 'id' && clave !== 'nombre' ){
+          rutinaNueva.push(valor);
+        }
+      });
+
+
+      const id = [];
+      Object.entries(rutinaActiva).map(([clave, valor])=>{
+        if(clave === 'id'){
+          id.push(valor);
+        }
+      });
+      const nombre = [];
+      Object.entries(rutinaActiva).map(([clave, valor])=>{
+        if(clave === 'nombre'){
+          nombre.push(valor);
+        }
+      });
+
+
+
+
+      const rutinaPost = [...Object.values(rutinaNueva)].reverse().slice((largoRutinaActiva - cantidadSesiones));
+      rutinaPost.reverse()
+      
+
+      setRutinaActiva(deArregloAObjetoHelper(rutinaPost, 'sesion'));
+      setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, id: id[0]}));
+      setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, nombre: nombre[0]}));
+      
+    }
   }
 
 
@@ -164,47 +250,92 @@ export const Rutinas = () => {
 
   const selectorEjercicios = (cantidadEjercicios)=>{
 
-
-    const largoSesion1Activa = Object.values(rutinaActiva.sesion1).length;
-    const largoSesion2Activa = Object.values(rutinaActiva.sesion2).length;
-    const largoSesion3Activa = Object.values(rutinaActiva.sesion3).length;
+    const largoSesionesActivas = [];
+    // Descartamos el id y el nombre
+    Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+      if(clave !== 'id' && clave !== 'nombre' ){
+        largoSesionesActivas.push(Object.values(valor).length);
+      }
+    });
+    // Rellenamos los otros espacion con cero
+    for (let i = (largoSesionesActivas.length); i < 7; i++) {
+      largoSesionesActivas.push(0);
+      
+    }
+    
+    
+    
+    
+    // const largoSesion1Activa = Object.values(rutinaActiva.sesion1).length;
+    // const largoSesion2Activa = Object.values(rutinaActiva.sesion2).length;
+    // const largoSesion3Activa = Object.values(rutinaActiva.sesion3).length;
     // const largoSesion4Activa = Object.values(rutinaActiva.sesion4).length;
     // const largoSesion5Activa = Object.values(rutinaActiva.sesion5).length;
     // const largoSesion6Activa = Object.values(rutinaActiva.sesion6).length;
     // const largoSesion7Activa = Object.values(rutinaActiva.sesion7).length;
-
-
+    
+    
     
     // Agregamos objetos
-    if(largoSesion1Activa < cantidadEjercicios){     
+    if(largoSesionesActivas[0] < cantidadEjercicios){     
       
-      const arregloInicialSesion1 = sumarObjetos(cantidadEjercicios, largoSesion1Activa);
-      const arregloInicialSesion2 = sumarObjetos(cantidadEjercicios, largoSesion2Activa);
-      const arregloInicialSesion3 = sumarObjetos(cantidadEjercicios, largoSesion3Activa);
-      // const arregloInicialSesion4 = sumarObjetos(cantidadEjercicios, largoSesion4Activa);
-      // const arregloInicialSesion5 = sumarObjetos(cantidadEjercicios, largoSesion5Activa);
-      // const arregloInicialSesion6 = sumarObjetos(cantidadEjercicios, largoSesion6Activa);
-      // const arregloInicialSesion7 = sumarObjetos(cantidadEjercicios, largoSesion7Activa);
-
-
+      const arregloInicialSesion1 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[0]);
+      const arregloInicialSesion2 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[1]);
+      const arregloInicialSesion3 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[2]);
+      const arregloInicialSesion4 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[3]);
+      const arregloInicialSesion5 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[4]);
+      const arregloInicialSesion6 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[5]);
+      const arregloInicialSesion7 = sumarObjetos(cantidadEjercicios, largoSesionesActivas[6]);
+      
+      
       const sesionesNuevas1 = [...Object.values(rutinaActiva.sesion1)];
-      const sesionesNuevas2 = [...Object.values(rutinaActiva.sesion2)];
-      const sesionesNuevas3 = [...Object.values(rutinaActiva.sesion3)];
-      const sesionesNuevas4 = [...Object.values(rutinaActiva.sesion3)];
-      const sesionesNuevas5 = [...Object.values(rutinaActiva.sesion3)];
-      const sesionesNuevas6 = [...Object.values(rutinaActiva.sesion3)];
-      const sesionesNuevas7 = [...Object.values(rutinaActiva.sesion3)];
+      // Sesiones previas para comprobar que la sesion existe,
+      // porque si no existe la funfion .push da error ya que intenta iterar sobre undefine
+      const sesionesNuevas2Prev = [0];
+      const sesionesNuevas3Prev = [0];
+      const sesionesNuevas4Prev = [0];
+      const sesionesNuevas5Prev = [0];
+      const sesionesNuevas6Prev = [0];
+      const sesionesNuevas7Prev = [0];
+      // Primero comprobamos que exista la sesion
+      if(rutinaActiva.sesion2 && rutinaActiva.sesion2 !== null){sesionesNuevas2Prev.push([...Object.values(rutinaActiva.sesion2)])}
+      if(rutinaActiva.sesion3 && rutinaActiva.sesion3 !== null){sesionesNuevas3Prev.push([...Object.values(rutinaActiva.sesion3)])}
+      if(rutinaActiva.sesion4 && rutinaActiva.sesion4 !== null){sesionesNuevas4Prev.push([...Object.values(rutinaActiva.sesion4)])}
+      if(rutinaActiva.sesion5 && rutinaActiva.sesion5 !== null){sesionesNuevas5Prev.push([...Object.values(rutinaActiva.sesion5)])}
+      if(rutinaActiva.sesion6 && rutinaActiva.sesion6 !== null){sesionesNuevas6Prev.push([...Object.values(rutinaActiva.sesion6)])}
+      if(rutinaActiva.sesion7 && rutinaActiva.sesion7 !== null){sesionesNuevas7Prev.push([...Object.values(rutinaActiva.sesion7)])}
 
+      // Si la sesion no existe, las sesiones nuevas toman el valor de cero
+      const [sesionesNuevas2] = [sesionesNuevas2Prev[sesionesNuevas2Prev.length - 1]];
+      const [sesionesNuevas3] = [sesionesNuevas3Prev[sesionesNuevas3Prev.length - 1]];
+      const [sesionesNuevas4] = [sesionesNuevas4Prev[sesionesNuevas4Prev.length - 1]];
+      const [sesionesNuevas5] = [sesionesNuevas5Prev[sesionesNuevas5Prev.length - 1]];
+      const [sesionesNuevas6] = [sesionesNuevas6Prev[sesionesNuevas6Prev.length - 1]];
+      const [sesionesNuevas7] = [sesionesNuevas7Prev[sesionesNuevas7Prev.length - 1]];
+      
+      console.log("largoSesionesActivas: ",
+        largoSesionesActivas[0],
+        largoSesionesActivas[1],
+        largoSesionesActivas[2],
+        largoSesionesActivas[3],
+        largoSesionesActivas[4],
+        largoSesionesActivas[5],
+        largoSesionesActivas[6],
+        largoSesionesActivas[7],
+
+      );
+      // console.log("sesionesNuevas2: ",sesionesNuevas2);
 
 
       // Fusionamos los arreglos nuevos con los viejos
       arregloInicialSesion1.map((objeto, index)=>{sesionesNuevas1.push(arregloInicialSesion1[index]);})
-      arregloInicialSesion2.map((objeto, index)=>{sesionesNuevas2.push(arregloInicialSesion2[index]);})
-      arregloInicialSesion3.map((objeto, index)=>{sesionesNuevas3.push(arregloInicialSesion3[index]);})
-      // arregloInicialSesion4.map((objeto, index)=>{sesionesNuevas4.push(arregloInicialSesion4[index]);})
-      // arregloInicialSesion5.map((objeto, index)=>{sesionesNuevas5.push(arregloInicialSesion5[index]);})
-      // arregloInicialSesion6.map((objeto, index)=>{sesionesNuevas6.push(arregloInicialSesion6[index]);})
-      // arregloInicialSesion7.map((objeto, index)=>{sesionesNuevas7.push(arregloInicialSesion7[index]);})
+      // Primero comprobamos que las constantes sean distintas de un numero entero con la funcion Number.isInteger()
+      arregloInicialSesion2.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas2)){sesionesNuevas2.push(arregloInicialSesion2[index]);}})
+      arregloInicialSesion3.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas3)){sesionesNuevas3.push(arregloInicialSesion3[index]);}})
+      arregloInicialSesion4.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas4)){sesionesNuevas4.push(arregloInicialSesion4[index]);}})
+      arregloInicialSesion5.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas5)){sesionesNuevas5.push(arregloInicialSesion5[index]);}})
+      arregloInicialSesion6.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas6)){sesionesNuevas6.push(arregloInicialSesion6[index]);}})
+      arregloInicialSesion7.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas7)){sesionesNuevas7.push(arregloInicialSesion7[index]);}})
       
       
 
@@ -230,29 +361,60 @@ export const Rutinas = () => {
 
 
     // Quitamos objetos
-    else if (largoSesion1Activa > cantidadEjercicios){
+    else if (largoSesionesActivas[0] > cantidadEjercicios){
+
+
+      const sesiones1Nuevas = [...Object.values(rutinaActiva.sesion1)].reverse().slice((largoSesionesActivas[0] - cantidadEjercicios));
+      
+      // Sesiones previas para comprobar la existencia de las mismas
+      const sesiones2NuevasPrev = [0];
+      const sesiones3NuevasPrev = [0];
+      const sesiones4NuevasPrev = [0];
+      const sesiones5NuevasPrev = [0];
+      const sesiones6NuevasPrev = [0];
+      const sesiones7NuevasPrev = [0];
+
+      // Eliminar los últimos objetos
+      if(rutinaActiva.sesion2 && rutinaActiva.sesion2 !== null){sesiones2NuevasPrev.push([...Object.values(rutinaActiva.sesion2)].reverse().slice((largoSesionesActivas[1] - cantidadEjercicios)))}
+      if(rutinaActiva.sesion3 && rutinaActiva.sesion3 !== null){sesiones3NuevasPrev.push([...Object.values(rutinaActiva.sesion3)].reverse().slice((largoSesionesActivas[2] - cantidadEjercicios)))}
+      if(rutinaActiva.sesion4 && rutinaActiva.sesion4 !== null){sesiones4NuevasPrev.push([...Object.values(rutinaActiva.sesion4)].reverse().slice((largoSesionesActivas[3] - cantidadEjercicios)))}
+      if(rutinaActiva.sesion5 && rutinaActiva.sesion5 !== null){sesiones5NuevasPrev.push([...Object.values(rutinaActiva.sesion5)].reverse().slice((largoSesionesActivas[4] - cantidadEjercicios)))}
+      if(rutinaActiva.sesion6 && rutinaActiva.sesion6 !== null){sesiones6NuevasPrev.push([...Object.values(rutinaActiva.sesion6)].reverse().slice((largoSesionesActivas[5] - cantidadEjercicios)))}
+      if(rutinaActiva.sesion7 && rutinaActiva.sesion7 !== null){sesiones7NuevasPrev.push([...Object.values(rutinaActiva.sesion7)].reverse().slice((largoSesionesActivas[6] - cantidadEjercicios)))}
+
+
+      const [sesiones2Nuevas] = [sesiones2NuevasPrev[sesiones2NuevasPrev.length - 1]];
+      const [sesiones3Nuevas] = [sesiones3NuevasPrev[sesiones3NuevasPrev.length - 1]];
+      const [sesiones4Nuevas] = [sesiones4NuevasPrev[sesiones4NuevasPrev.length - 1]];
+      const [sesiones5Nuevas] = [sesiones5NuevasPrev[sesiones5NuevasPrev.length - 1]];
+      const [sesiones6Nuevas] = [sesiones6NuevasPrev[sesiones6NuevasPrev.length - 1]];
+      const [sesiones7Nuevas] = [sesiones7NuevasPrev[sesiones7NuevasPrev.length - 1]];
+
 
 
       // Eliminar los últimos objetos
-      const sesiones1Nuevas = [...Object.values(rutinaActiva.sesion1)].reverse().slice((largoSesion1Activa - cantidadEjercicios));
-      const sesiones2Nuevas = [...Object.values(rutinaActiva.sesion2)].reverse().slice((largoSesion2Activa - cantidadEjercicios));
-      const sesiones3Nuevas = [...Object.values(rutinaActiva.sesion3)].reverse().slice((largoSesion3Activa - cantidadEjercicios));
-      // const sesiones4Nuevas = [...Object.values(rutinaActiva.sesion4)].reverse().slice((largoSesion4Activa - cantidadEjercicios));
-      // const sesiones5Nuevas = [...Object.values(rutinaActiva.sesion5)].reverse().slice((largoSesion5Activa - cantidadEjercicios));
-      // const sesiones6Nuevas = [...Object.values(rutinaActiva.sesion6)].reverse().slice((largoSesion6Activa - cantidadEjercicios));
-      // const sesiones7Nuevas = [...Object.values(rutinaActiva.sesion7)].reverse().slice((largoSesion7Activa - cantidadEjercicios));
+      // const sesiones2Nuevas = [...Object.values(rutinaActiva.sesion2)].reverse().slice((largoSesionesActivas[1] - cantidadEjercicios));
+      // const sesiones3Nuevas = [...Object.values(rutinaActiva.sesion3)].reverse().slice((largoSesionesActivas[2] - cantidadEjercicios));
+      // const sesiones4Nuevas = [...Object.values(rutinaActiva.sesion4)].reverse().slice((largoSesionesActivas[3] - cantidadEjercicios));
+      // const sesiones5Nuevas = [...Object.values(rutinaActiva.sesion5)].reverse().slice((largoSesionesActivas[4] - cantidadEjercicios));
+      // const sesiones6Nuevas = [...Object.values(rutinaActiva.sesion6)].reverse().slice((largoSesionesActivas[5] - cantidadEjercicios));
+      // const sesiones7Nuevas = [...Object.values(rutinaActiva.sesion7)].reverse().slice((largoSesionesActivas[6] - cantidadEjercicios));
       sesiones1Nuevas.reverse()
-      sesiones2Nuevas.reverse()
-      sesiones3Nuevas.reverse()
+      if(!Number.isInteger(sesiones2Nuevas)){sesiones2Nuevas.reverse()}
+      if(!Number.isInteger(sesiones3Nuevas)){sesiones3Nuevas.reverse()}
+      if(!Number.isInteger(sesiones4Nuevas)){sesiones4Nuevas.reverse()}
+      if(!Number.isInteger(sesiones5Nuevas)){sesiones5Nuevas.reverse()}
+      if(!Number.isInteger(sesiones6Nuevas)){sesiones6Nuevas.reverse()}
+      if(!Number.isInteger(sesiones7Nuevas)){sesiones7Nuevas.reverse()}
 
 
       if(rutinaActiva.sesion1) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion1: deArregloAObjetoHelper(sesiones1Nuevas, 'ejercicio')}));
-      if(rutinaActiva.sesion2) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion2: deArregloAObjetoHelper(sesiones2Nuevas, 'ejercicio')}));
-      if(rutinaActiva.sesion3) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion3: deArregloAObjetoHelper(sesiones3Nuevas, 'ejercicio')}));
-      // if(rutinaActiva.sesion4) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion4: deArregloAObjetoHelper(sesiones4Nuevas.reverse(), 'ejercicio')}));
-      // if(rutinaActiva.sesion5) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion5: deArregloAObjetoHelper(sesiones5Nuevas.reverse(), 'ejercicio')}));
-      // if(rutinaActiva.sesion6) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion6: deArregloAObjetoHelper(sesiones6Nuevas.reverse(), 'ejercicio')}));
-      // if(rutinaActiva.sesion7) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion7: deArregloAObjetoHelper(sesiones7Nuevas.reverse(), 'ejercicio')}));
+      if(rutinaActiva.sesion2 && !Number.isInteger(sesiones2Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion2: deArregloAObjetoHelper(sesiones2Nuevas, 'ejercicio')}));
+      if(rutinaActiva.sesion3 && !Number.isInteger(sesiones3Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion3: deArregloAObjetoHelper(sesiones3Nuevas, 'ejercicio')}));
+      if(rutinaActiva.sesion4 && !Number.isInteger(sesiones4Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion4: deArregloAObjetoHelper(sesiones4Nuevas, 'ejercicio')}));
+      if(rutinaActiva.sesion5 && !Number.isInteger(sesiones5Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion5: deArregloAObjetoHelper(sesiones5Nuevas, 'ejercicio')}));
+      if(rutinaActiva.sesion6 && !Number.isInteger(sesiones6Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion6: deArregloAObjetoHelper(sesiones6Nuevas, 'ejercicio')}));
+      if(rutinaActiva.sesion7 && !Number.isInteger(sesiones7Nuevas)) setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, sesion7: deArregloAObjetoHelper(sesiones7Nuevas, 'ejercicio')}));
 
       
 
@@ -366,7 +528,7 @@ export const Rutinas = () => {
 
 
 
-      <div className='mt-5' style={{width:"95%"}}>
+      <div className='mt-5' style={{width:"95%", backgroundColor: "white"}}>
 
         <table class="table align-middle table-borderless table-sm">
           <thead >
@@ -394,9 +556,9 @@ export const Rutinas = () => {
 
 
                     {/* SELECTOR EJERCICIOS */}
-                    <td style={{width:"20%"}}>
+                    <td style={{width:"20%", backgroundColor: "white"}}>
                       {/* El select debe tener el value guardado del objeto en la base de datos value={el alimento de la base de datos} */}
-                      <select onChange={(e)=>{handleSelectChange(e, index, cl)}}  value={ejerciciosSeccion.ejercicio} className="me-2 fs-6 rounded" style={{height:"30px", color:"black", width:"100%", border:"none"}}>
+                      <select onChange={(e)=>{handleSelectChange(e, index, cl)}}  value={ejerciciosSeccion.ejercicio} className="me-2 fs-6 rounded" style={{height:"30px", color:"black", width:"100%", border:"none", backgroundColor: "white"}}>
                         {ejercicios.map((elemento) => (
                           <option key={elemento.ejercicio} value={elemento.ejercicio}>
                             {elemento.ejercicio}
@@ -469,6 +631,9 @@ export const Rutinas = () => {
           activarEstaRutina={activarEstaRutina}
           guardar={guardar}
           numeroSesionActiva={numeroSesionActiva}
+          selectorSesiones={selectorSesiones}
+          numeroSesiones={numeroSesiones}
+          rutinas={rutinas}
         />
       </div>
 

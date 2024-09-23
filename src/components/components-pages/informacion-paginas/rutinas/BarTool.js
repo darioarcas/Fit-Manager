@@ -9,7 +9,10 @@ export const BarTool = ({
     numeroEjercicios,
     activarEstaRutina,
     guardar,
-    numeroSesionActiva
+    numeroSesionActiva,
+    selectorSesiones,
+    numeroSesiones,
+    rutinas
 }) => {
 
 
@@ -34,61 +37,6 @@ export const BarTool = ({
 
 
 
-{/* 
-
-            <div className="d-flex" style={{justifyContent:"space-between"}}>
-                <div 
-                    style={{
-                        fontWeight:"bold",
-                        backgroundColor:"white",
-                        borderRadius:"5px",
-                        color:"black",
-                        margin:"0px 0px",
-                        padding:"0px 5px",
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"center"                   
-                    }} 
-                    onClick={selectorEjercicios}
-                >
-                    <h3 className="p-0 m-0">+</h3>
-                </div>
-                <p 
-                    className="m-0 fs-6"
-                    style={{
-                        fontWeight:"bold",
-                        backgroundColor:"white",
-                        borderRadius:"5px",
-                        color:"black",
-                        margin:"0px 0px",
-                        padding:"0px 4px",
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"center"                   
-                    }} 
-                >
-                    {numeroEjercicios}                    
-                </p>
-                <div 
-                    style={{
-                        fontWeight:"bold",
-                        backgroundColor:"white",
-                        borderRadius:"5px",
-                        color:"black",
-                        margin:"0px 0px",
-                        padding:"0px 8px",
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"center"                   
-                    }} 
-                    onClick={botonQuitar}
-                >
-                    <h3 className="p-0 m-0">-</h3>
-                </div>
-            </div> */}
-
-
-
         </div>
 
 
@@ -97,13 +45,14 @@ export const BarTool = ({
 
         <div>
             <p>SESIONES</p>
-            <select style={{border:"none", width:"100%"}}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
+            <select style={{border:"none", width:"100%"}} value={numeroSesiones} onChange={(e)=>{selectorSesiones(e.target.value)}}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+                <option value={6}>6</option>
+                <option value={7}>7</option>
             </select>
         </div>
 
@@ -114,7 +63,11 @@ export const BarTool = ({
         <div>
             <p>CARGAR RUTINA</p>
             <select style={{border:"none", width:"100%"}}>
-                <option></option>
+                {Object.entries(rutinas).map(([clave, valor, index]) => (
+                    <option key={index} value={valor.nombre}>
+                    {valor.nombre}
+                    </option>
+                ))}
             </select>
         </div>
         
