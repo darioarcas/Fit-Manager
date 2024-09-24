@@ -1,3 +1,4 @@
+import { deArregloAObjetoHelper } from "../helpers/deArregloAObjeto";
 import { types } from "../types/types";
 
 
@@ -76,7 +77,43 @@ export const rutinasReducer = (state=initialState, action) => {
     
 
 
+        // Se modifica un alumno
+        case types.rutinaUpdate:
+            return{
+                ...state,
+                rutinas: deArregloAObjetoHelper(
+                    Object.values(state.rutinas).map(
+                        (rutina) => (rutina.id === action.payload.id)
+                            ? action.payload.rutina
+                            : rutina
+                        ), 'rutina'
+                ) 
+            }
 
+
+
+
+        case types.rutinaNew:
+            const largo = Object.values(state.rutinas).map((valor)=>{
+                return valor;
+            });
+            largo.push(action.payload);
+
+            console.log("CARGADO DE TODAS LAS RUTINAS: ", deArregloAObjetoHelper(largo, 'rutina'));
+            
+            console.log(
+                {
+                    ...state,
+                    rutinas: deArregloAObjetoHelper(largo, 'rutina'),
+                    active: action.payload
+                }
+        
+            );
+        return {
+            ...state,
+            rutinas: deArregloAObjetoHelper(largo, 'rutina'),
+            active: action.payload
+        }
 
 
 

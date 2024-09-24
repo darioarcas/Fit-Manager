@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BarTool } from './informacion-paginas/rutinas/BarTool';
 import { ejercicios } from './informacion-paginas/rutinas/RutinasArreglos';
-import { activarRutina, agregarRutina } from '../../actions/rutina';
+import { activarRutina, agregarRutina, guardarRutina } from '../../actions/rutina';
 import { useDispatch, useSelector } from 'react-redux';
 import { deArregloAObjetoHelper } from '../../helpers/deArregloAObjeto';
 import App from './CalculadoraIC';
+import Swal from 'sweetalert2';
 
 
 
 // Rutina
 const rutinaInit = {
   id:"",
-  nombre:"Nombre rutina",
+  nombre:"Asigna un Nombre",
   sesion1:{
       ejercicio1:{
           ejercicio: "",
@@ -80,12 +81,42 @@ export const Rutinas = () => {
   
   
   // Extraemos del reducer las rutinas que el usuario haya guardado
-  const rutinas = useSelector(reducer => (reducer.rutinas.rutinas));
+  const rutinas = useSelector(reducer => (
+      // De forma condicional verificamos que exista la rutina1
+      reducer.rutinas.rutinas.rutina1 ? 
+      reducer.rutinas.rutinas : 
+
+      // Si no existe (por ser usuario nuevo, o haberse eliminado todas), se crea una 
+      {
+        rutina1:{
+          id:"",
+          nombre:"Nombre rutina",
+          sesion1:{
+              // ejercicio1:{},
+          }
+        }
+      }
+
+    )
+  );
+
+  const selectorRutinaActiva = useSelector(reducer=>(reducer.rutinas));
+
+
+
+
+  // SOLUCIONAR ESTE ERROR!! el id de rutina activa deberia actualizarse cuando
+  // se guarda una nueva rutina: El error ocurre cuando no existen rutinas, se guarda una rutina
+  // (el id de rutinaActiva queda vacio) y se intentan guardar los cambios
+  useEffect(() => {
+    setRutinaActiva({...rutinaActiva, id: selectorRutinaActiva.active.id});
+  }, [selectorRutinaActiva.active.id])
+  
   
   
   // ejercicioSeleccionado contiene todos los ejercicios de una sesion
-  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(Object.values(rutinas.rutina1.sesion1));
-
+  // const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(Object.values(rutinas.rutina1.sesion1));
+  
   
   
   
@@ -93,11 +124,34 @@ export const Rutinas = () => {
   const [rutinaActiva, setRutinaActiva] = useState(rutinas.rutina1);
   // console.log("Rutina Activa Primero: ", rutinas);
   
+  
+  // // if(!rutinas.id || !rutinas.nombre || !rutinas.sesion1){
+  // if(!rutinas.rutina1){
+  //   setRutinaActiva(
+  //     {
+  //       id:"",
+  //       nombre:"Nombre rutina",
+  //       sesion1:{
+  //           ejercicio1:{
+  //               ejercicio: "",
+  //               img: "",
+  //               video: "",
+  //               pausa: "",
+  //               ejecucion: ""
+  //           },
+  //       }
+  //     }
+  //   );
+  //   console.log("NO EXISTE RUTINA1: ", rutinas);
+  // }
+  
   const [numeroEjercicios, setNumeroEjercicios] = useState(Object.values(rutinaActiva.sesion1).length);
 
 
   const [auxiliar, setAuxiliar] = useState([]);
   const [numeroSesiones, setNumeroSesiones] = useState(Object.values(rutinaActiva).length - 2);
+
+  const [nombreRutina, setNombreRutina] = useState(rutinaActiva.nombre)
 
   const dispatch = useDispatch();
 
@@ -145,6 +199,7 @@ export const Rutinas = () => {
     setNumeroSesiones(Object.values(rutinaActiva).length - 2)
   }, [rutinaActiva]);
   
+  console.log("ID ACTIVO: ", rutinaActiva.id);
 
 
 
@@ -262,6 +317,10 @@ export const Rutinas = () => {
       largoSesionesActivas.push(0);
       
     }
+
+
+
+    
     
     
     
@@ -446,9 +505,43 @@ export const Rutinas = () => {
 
 
 
+  const selectorRutinas = (nombreRutina)=>{
+    const rutina = [];
+    Object.entries(rutinas).map(([clave, valor, index])=>{
+      if(valor.nombre === nombreRutina){
+        rutina.push(valor);
+      }
+    });
+
+    setRutinaActiva(rutina[0]);
+    setNombreRutina(nombreRutina);
+  }
 
 
 
+
+
+
+  const actualizarRutina = ()=>{
+    if(!rutinaActiva.id){
+      console.log("NO EXISTE EL ID!!!!!!!!!!!!!!!!!!!!!!!!: ", rutinaActiva.id);
+      Swal.fire('Error','Guarda la rutina como NUEVA RUTINA', 'error');
+      return;
+    }
+    dispatch(guardarRutina(rutinaActiva));
+  }
+
+
+
+  const eliminarRutina = ()=>{
+    console.log("ELIMINANDO...");
+    if(!rutinaActiva.id){
+      console.log("NO EXISTE EL ID!!!!!!!!!!!!!!!!!!!!!!!!: ", rutinaActiva.id);
+      Swal.fire('Error','Guarda la rutina como NUEVA RUTINA', 'error');
+      return;
+    }
+    dispatch(eliminarRutina(rutinaActiva.id));
+  }
 
 
 
@@ -466,6 +559,7 @@ export const Rutinas = () => {
   const activarEstaRutina = ()=>{
 
     dispatch(activarRutina(rutinaActiva.id, rutinaActiva));
+
   }
   
 
@@ -473,12 +567,22 @@ export const Rutinas = () => {
 
 
   // Agregar Nueva Rutina
-  const guardar = ()=>{
-    console.log("GUARDANDO!!!!!!!");
+  const guardar = async()=>{
     dispatch(agregarRutina(rutinaActiva));
+    // setRutinaActiva(prevActiva =>({...prevActiva, id: rutinas}));
+    console.log("selectorRutinaActiva: ", selectorRutinaActiva);
   }
 
 
+  const idViejo = useRef(rutinaActiva.id);
+
+  // if(idViejo.current !== selectorRutinaActiva.active.id && selectorRutinaActiva.active.id){
+  //   console.log("ID Viejo: ", idViejo.current, "        ID Nuevo: ",selectorRutinaActiva.active.id);
+  //   setRutinaActiva({...rutinaActiva, id: selectorRutinaActiva.active.id});
+  //   // Si son diferentes entonces se almacena el nuevo valor
+  //   idViejo.current = selectorRutinaActiva.active.id;
+  // }
+  
 
 
   
@@ -514,7 +618,7 @@ export const Rutinas = () => {
 
 
   return (
-    <div className='d-flex flex-column justify-content-center align-items-center positon-relative '>
+    <div style={{marginBottom:"100px"}} className='d-flex flex-column justify-content-center align-items-center positon-relative '>
 
 
 
@@ -530,7 +634,7 @@ export const Rutinas = () => {
 
       <div className='mt-5' style={{width:"95%", backgroundColor: "white"}}>
 
-        <table class="table align-middle table-borderless table-sm">
+        <table className="table align-middle table-borderless table-sm">
           <thead >
             <tr>
               <th scope="col">#</th>
@@ -624,7 +728,7 @@ export const Rutinas = () => {
       
 
 
-      <div className='position-fixed bottom-0 bg-black w-100 px-4 py-1 pb-4' style={{opacity:"30%"}}>
+      <div className='position-fixed bottom-0 bg-black w-100 px-2 py-1 pb-4' style={{opacity:"70%"}}>
         <BarTool 
           selectorEjercicios={selectorEjercicios}
           numeroEjercicios={numeroEjercicios}
@@ -634,6 +738,13 @@ export const Rutinas = () => {
           selectorSesiones={selectorSesiones}
           numeroSesiones={numeroSesiones}
           rutinas={rutinas}
+          selectorRutinas={selectorRutinas}
+          nombreRutina={nombreRutina}
+          setNombreRutina={setNombreRutina}
+          setRutinaActiva={setRutinaActiva}
+          rutinaActiva={rutinaActiva}
+          actualizarRutina={actualizarRutina}
+          eliminarRutina={eliminarRutina}
         />
       </div>
 

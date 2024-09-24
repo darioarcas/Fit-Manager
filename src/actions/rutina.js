@@ -18,6 +18,11 @@ export const agregarRutina = (nuevaRutina) => {
   
         const uid = getState().auth.uid;
 
+        // creamos una copia de la nota para eliminar el id
+        const rutinaAFirestore = {...nuevaRutina};
+        // eliminamos el id
+        delete rutinaAFirestore.id;
+
         // const nuevaRutina = {
         //   rutina:{
         //       nombre:"Nombre rutina",
@@ -40,9 +45,19 @@ export const agregarRutina = (nuevaRutina) => {
         // }
     
     
-        const doc = await db.collection(`${uid}/rutinas-usuario/rutina`).add(nuevaRutina);
+        const doc = await db.collection(`${uid}/rutinas-usuario/rutina`).add(rutinaAFirestore);
         dispatch(activarRutina(doc.id, nuevaRutina));
        dispatch(agregarNuevaRutinaReducer(doc.id, nuevaRutina));
+
+      //  // Actualizamos el alumno en el store
+      //  dispatch(refrescarRutina(doc.id, nuevaRutina));
+
+       // Swal.fire('Guardado', note.title, 'success');
+       Swal.fire({
+        title: 'Guardado!',
+        timer: 800,
+        icon: 'success'
+    });
     }
   }
 
@@ -185,7 +200,7 @@ export const guardarRutina = (rutina)=>{
   
         // Swal.fire('Guardado', note.title, 'success');
         Swal.fire({
-            title: 'Guardado',
+            title: 'Actualizado!',
             timer: 800,
             icon: 'success'
         });
