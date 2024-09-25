@@ -45,14 +45,11 @@ export const agregarRutina = (nuevaRutina) => {
         // }
     
     
-        const doc = await db.collection(`${uid}/rutinas-usuario/rutina`).add(rutinaAFirestore);
-        dispatch(activarRutina(doc.id, nuevaRutina));
-       dispatch(agregarNuevaRutinaReducer(doc.id, nuevaRutina));
+      const doc = await db.collection(`${uid}/rutinas-usuario/rutina`).add(rutinaAFirestore);
+      dispatch(activarRutina(doc.id, nuevaRutina));
+      dispatch(agregarNuevaRutinaReducer(doc.id, nuevaRutina));
 
-      //  // Actualizamos el alumno en el store
-      //  dispatch(refrescarRutina(doc.id, nuevaRutina));
 
-       // Swal.fire('Guardado', note.title, 'success');
        Swal.fire({
         title: 'Guardado!',
         timer: 800,
@@ -143,7 +140,9 @@ export const empezarCargaRutinas = (uid)=>{
   export const eliminarRutina = (id)=>{
     
     return async(dispatch, getState)=>{
-  
+        
+        console.log("PASO!!!!!");
+        
         const uid = getState().auth.uid;
         await db.doc(`${uid}/rutinas-usuario/rutina/${id}`).delete();
   

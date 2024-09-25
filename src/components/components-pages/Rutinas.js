@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BarTool } from './informacion-paginas/rutinas/BarTool';
 import { ejercicios } from './informacion-paginas/rutinas/RutinasArreglos';
-import { activarRutina, agregarRutina, guardarRutina } from '../../actions/rutina';
+import { activarRutina, agregarRutina, eliminarRutina, guardarRutina } from '../../actions/rutina';
 import { useDispatch, useSelector } from 'react-redux';
 import { deArregloAObjetoHelper } from '../../helpers/deArregloAObjeto';
 import App from './CalculadoraIC';
@@ -90,10 +90,8 @@ export const Rutinas = () => {
       {
         rutina1:{
           id:"",
-          nombre:"Nombre rutina",
-          sesion1:{
-              // ejercicio1:{},
-          }
+          nombre:"",
+          sesion1:{}
         }
       }
 
@@ -506,6 +504,7 @@ export const Rutinas = () => {
 
 
   const selectorRutinas = (nombreRutina)=>{
+    if(nombreRutina === "") return;
     const rutina = [];
     Object.entries(rutinas).map(([clave, valor, index])=>{
       if(valor.nombre === nombreRutina){
@@ -524,7 +523,6 @@ export const Rutinas = () => {
 
   const actualizarRutina = ()=>{
     if(!rutinaActiva.id){
-      console.log("NO EXISTE EL ID!!!!!!!!!!!!!!!!!!!!!!!!: ", rutinaActiva.id);
       Swal.fire('Error','Guarda la rutina como NUEVA RUTINA', 'error');
       return;
     }
@@ -533,14 +531,20 @@ export const Rutinas = () => {
 
 
 
-  const eliminarRutina = ()=>{
-    console.log("ELIMINANDO...");
+  const eliminar = ()=>{
     if(!rutinaActiva.id){
-      console.log("NO EXISTE EL ID!!!!!!!!!!!!!!!!!!!!!!!!: ", rutinaActiva.id);
-      Swal.fire('Error','Guarda la rutina como NUEVA RUTINA', 'error');
+      Swal.fire('Error','No Existe esta Rutina', 'error');
       return;
     }
     dispatch(eliminarRutina(rutinaActiva.id));
+    setNombreRutina("");
+    setRutinaActiva(
+      {
+        id:"",
+        nombre:"",
+        sesion1:{}
+      }
+    );
   }
 
 
@@ -744,7 +748,7 @@ export const Rutinas = () => {
           setRutinaActiva={setRutinaActiva}
           rutinaActiva={rutinaActiva}
           actualizarRutina={actualizarRutina}
-          eliminarRutina={eliminarRutina}
+          eliminar={eliminar}
         />
       </div>
 

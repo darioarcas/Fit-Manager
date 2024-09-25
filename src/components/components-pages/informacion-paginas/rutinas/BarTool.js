@@ -19,7 +19,7 @@ export const BarTool = ({
     setRutinaActiva,
     rutinaActiva,
     actualizarRutina,
-    eliminarRutina
+    eliminar
 }) => {
 
 
@@ -80,7 +80,11 @@ export const BarTool = ({
 
             <div style={{width:"37%"}}>
                 <p className="text-center mb-0">CARGAR RUTINA</p>
-                <select style={{border:"none",borderRadius:"5px", backgroundColor:"#151515", color:"white", width:"100%"}} onChange={(e)=>{selectorRutinas(e.target.value)}}>
+                <select 
+                    style={{border:"none",borderRadius:"5px", backgroundColor:"#151515", color:"white", width:"100%"}} 
+                    onChange={(e)=>{selectorRutinas(e.target.value)}}
+                >
+                    <option value="">--Selecciona--</option>
                     {Object.entries(rutinas).map(([clave, valor, index]) => (
                         //   selected={rutinaActiva.nombre}
                         <option key={index} value={valor.nombre}>
@@ -130,6 +134,7 @@ export const BarTool = ({
                     }} 
                     value={nombreRutina} 
                     onChange={(e)=>{handleNameChange(e)}}
+                    // placeholder="Agregar Nombre"
                 />
             </div>
             
@@ -189,7 +194,7 @@ export const BarTool = ({
                         cursor:"pointer",            
 
                     }}
-                    onClick={eliminarRutina}
+                    onClick={eliminar}
                 >
                     <p style={{textAlign:"center", margin:"0 auto", fontSize:"12px", overflow:"clip"}}>ELIMINAR</p>
                 </div>

@@ -109,11 +109,32 @@ export const rutinasReducer = (state=initialState, action) => {
                 }
         
             );
-        return {
-            ...state,
-            rutinas: deArregloAObjetoHelper(largo, 'rutina'),
-            active: action.payload
-        }
+
+            return {
+                ...state,
+                rutinas: deArregloAObjetoHelper(largo, 'rutina'),
+                active: action.payload
+            }
+
+
+
+
+
+
+
+
+
+        // Se elimina una Dieta
+        case types.rutinaDelete:
+            return{
+                ...state,
+                active: {},
+                // Devuelve todos las rutinas, exeptuando la que coincida con el id del payload
+                rutinas: deArregloAObjetoHelper(Object.values(state.rutinas).filter(rutina => rutina.id !== action.payload), 'rutina')
+            }
+
+
+
 
 
 
