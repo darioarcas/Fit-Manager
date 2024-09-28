@@ -21,7 +21,7 @@ const initialArray = {
 
 
 
-export const CalorieCalculator = () => {
+export const CalorieCalculator = ({sumatoriaTotal, setCalculadoraAlmuerzo}) => {
 
   const dietaActiva = useSelector((store)=>{return store.dietas.active});
 
@@ -102,8 +102,8 @@ export const CalorieCalculator = () => {
         carbohidratos: (parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos6.carbohidratos) + parseFloat(alimentos7.carbohidratos)).toFixed(2),
         grasas: (parseFloat(dietaValores.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos6.grasas) + parseFloat(alimentos7.grasas)).toFixed(2)
       };
-
-      dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+      setCalculadoraAlmuerzo(suma);
+      sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
 
 
     }else if(numero === 0 || n === 2){
@@ -118,7 +118,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos6.carbohidratos) + parseFloat(alimentos7.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos6.grasas) + parseFloat(alimentos7.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }else if(numero === 0 || n === 3){
       // Para que se dispare la primera vez
       setNumero(n);
@@ -131,7 +132,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos6.carbohidratos) + parseFloat(alimentos7.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos6.grasas) + parseFloat(alimentos7.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }else if(numero === 0 || n === 4){
       // Para que se dispare la primera vez
       setNumero(n);
@@ -144,7 +146,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos6.carbohidratos) + parseFloat(alimentos7.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos6.grasas) + parseFloat(alimentos7.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }else if(numero === 0 || n === 5){
       // Para que se dispare la primera vez
       setNumero(n);
@@ -157,7 +160,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos6.carbohidratos) + parseFloat(alimentos7.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos6.grasas) + parseFloat(alimentos7.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }else if(numero === 0 || n === 6){
       // Para que se dispare la primera vez
       setNumero(n);
@@ -170,7 +174,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos7.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos7.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }else if(numero === 0 || n === 7){
       // Para que se dispare la primera vez
       setNumero(n);
@@ -183,7 +188,8 @@ export const CalorieCalculator = () => {
           carbohidratos: ((parseFloat(dietaValores.carbohidratos) + parseFloat(alimentos1.carbohidratos) + parseFloat(alimentos2.carbohidratos) + parseFloat(alimentos3.carbohidratos) + parseFloat(alimentos4.carbohidratos) + parseFloat(alimentos5.carbohidratos) + parseFloat(alimentos6.carbohidratos))).toFixed(2),
           grasas: ((parseFloat(dietaValores.grasas) + parseFloat(alimentos1.grasas) + parseFloat(alimentos2.grasas) + parseFloat(alimentos3.grasas) + parseFloat(alimentos4.grasas) + parseFloat(alimentos5.grasas) + parseFloat(alimentos6.grasas))).toFixed(2)
         };
-        dispatch(actualizarProteina(dietaActiva.id, suma, dietaActiva));
+        setCalculadoraAlmuerzo(suma);
+        sumatoriaTotal(dietaActiva.id, suma, dietaActiva, "almuerzo");
      }
   }
 

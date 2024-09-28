@@ -3,6 +3,7 @@ import { db } from "../firebase/firebase-config";
 import { cargarRutinas } from "../helpers/cargarRutinas";
 import { types } from "../types/types";
 import { deArregloAObjetoHelper } from "../helpers/deArregloAObjeto";
+import { ordenarRutinasHelper } from "../helpers/ordenarRutinasHelper";
 
 
 
@@ -82,8 +83,14 @@ export const empezarCargaRutinas = (uid)=>{
         // Cargamos las notas del usuario
         // llamada a la db para extraer las rutinas
         const rutinas = await cargarRutinas(uid);
+
+        // Ordenasmos las rutinas y los ejercicios que vienen de la db
+        const rutinasOrdenadas = ordenarRutinasHelper(deArregloAObjetoHelper(rutinas, 'rutina'));
+
+
         // llamamos a la accion y la enviamos al store
-        dispatch(setearRutinasReducer(deArregloAObjetoHelper(rutinas, 'rutina')));
+        dispatch(setearRutinasReducer(rutinasOrdenadas));
+        // dispatch(setearRutinasReducer(deArregloAObjetoHelper(rutinasOrdenadas, 'rutina')));
         // dispatch(setearRutinasReducer(rutinas));
     }
   }
@@ -239,3 +246,10 @@ export const guardarRutina = (rutina)=>{
 //     }
 //   }
   
+
+
+
+
+
+
+

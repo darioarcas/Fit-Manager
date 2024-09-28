@@ -151,14 +151,25 @@ export const Rutinas = () => {
 
   const [nombreRutina, setNombreRutina] = useState(rutinaActiva.nombre)
 
+  const [selectorNombreRutina, setSelectorNombreRutina] = useState(nombreRutina)
+
   const dispatch = useDispatch();
 
   
 
   const handleSelectChange = (e, index, sesiones) => {
+
     // Devuelve el primer elemento del array que cumple con la condición
     
-    const ejercicioEncontrado = ejercicios.find(a => a.ejercicio === e.target.value);
+    const sinTitulo ={
+      ejercicio: "",
+      img: "",
+      video: "",
+      pausa: "",
+      ejecucion: ""
+    }
+    // Si el ejercicio:"" entonces se selecciona sinTitulo
+    const ejercicioEncontrado = (e.target.value === "") ? sinTitulo : ejercicios.find(a => a.ejercicio === e.target.value);
 
     
     // Solo modificamos el objeto seleccionado dentro del arreglo de objetos
@@ -172,7 +183,13 @@ export const Rutinas = () => {
     if(sesiones === 'sesion7') rutinaActivaHandle.push(rutinaActiva.sesion7);
     const nuevoarreglo = Object.values(rutinaActivaHandle[0]).map((seleccionado, i)=>{
       if(i === index){
-        return ejercicioEncontrado;
+        return {
+          ...seleccionado,
+          ejercicio: ejercicioEncontrado.ejercicio,
+          img: ejercicioEncontrado.img,
+          video: ejercicioEncontrado.video
+
+        };
       }
       return seleccionado;
     });
@@ -189,7 +206,109 @@ export const Rutinas = () => {
     if(sesiones === 'sesion7') setRutinaActiva({...rutinaActiva, sesion7: deArregloAObjetoHelper(nuevoarreglo, 'ejercicio')})
 
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleEjecucionChange = (e, index, cl, sesiones)=>{
+    // Solo modificamos el objeto seleccionado dentro del arreglo de objetos
+    const sesionActivaHandle = [];
+    if(cl === 'sesion1') sesionActivaHandle.push(rutinaActiva.sesion1);
+    if(cl === 'sesion2') sesionActivaHandle.push(rutinaActiva.sesion2);
+    if(cl === 'sesion3') sesionActivaHandle.push(rutinaActiva.sesion3);
+    if(cl === 'sesion4') sesionActivaHandle.push(rutinaActiva.sesion4);
+    if(cl === 'sesion5') sesionActivaHandle.push(rutinaActiva.sesion5);
+    if(cl === 'sesion6') sesionActivaHandle.push(rutinaActiva.sesion6);
+    if(cl === 'sesion7') sesionActivaHandle.push(rutinaActiva.sesion7);
+
+    // El nuevo arreglo contiene la nueva sesion actualizada en un arreglo de objetos(ejercicios)
+    const nuevoarregloEjercicios = Object.values(sesionActivaHandle[0]).map((ejercicio, i)=>{
+      // Encontramos el ejercicio en el que hay que actualizar la ejecucion
+      if(i === index){
+        return {
+          ...ejercicio,
+          ejecucion: e.target.value
+        }
+      }
+      return ejercicio;
+    });
+
+
+    // Actualizamos rutinaActiva
+    
+    if(cl === 'sesion1') setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion2') setRutinaActiva({...rutinaActiva, sesion2: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion3') setRutinaActiva({...rutinaActiva, sesion3: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion4') setRutinaActiva({...rutinaActiva, sesion4: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion5') setRutinaActiva({...rutinaActiva, sesion5: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion6') setRutinaActiva({...rutinaActiva, sesion6: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion7') setRutinaActiva({...rutinaActiva, sesion7: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
   
+
+
+  }
+  
+
+
+
+
+  const handlePausaChange = (e, index, cl, sesiones)=>{
+    console.log(cl, index, sesiones);
+    // Solo modificamos el objeto seleccionado dentro del arreglo de objetos
+    const sesionActivaHandle = [];
+    if(cl === 'sesion1') sesionActivaHandle.push(rutinaActiva.sesion1);
+    if(cl === 'sesion2') sesionActivaHandle.push(rutinaActiva.sesion2);
+    if(cl === 'sesion3') sesionActivaHandle.push(rutinaActiva.sesion3);
+    if(cl === 'sesion4') sesionActivaHandle.push(rutinaActiva.sesion4);
+    if(cl === 'sesion5') sesionActivaHandle.push(rutinaActiva.sesion5);
+    if(cl === 'sesion6') sesionActivaHandle.push(rutinaActiva.sesion6);
+    if(cl === 'sesion7') sesionActivaHandle.push(rutinaActiva.sesion7);
+
+    // El nuevo arreglo contiene la nueva sesion actualizada en un arreglo de objetos(ejercicios)
+    const nuevoarregloEjercicios = Object.values(sesionActivaHandle[0]).map((ejercicio, i)=>{
+      // Encontramos el ejercicio en el que hay que actualizar la ejecucion
+      if(i === index){
+        return {
+          ...ejercicio,
+          pausa: e.target.value
+        }
+      }
+      return ejercicio;
+    });
+
+
+    // Actualizamos rutinaActiva
+    
+    if(cl === 'sesion1') setRutinaActiva({...rutinaActiva, sesion1: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion2') setRutinaActiva({...rutinaActiva, sesion2: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion3') setRutinaActiva({...rutinaActiva, sesion3: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion4') setRutinaActiva({...rutinaActiva, sesion4: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion5') setRutinaActiva({...rutinaActiva, sesion5: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion6') setRutinaActiva({...rutinaActiva, sesion6: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+    if(cl === 'sesion7') setRutinaActiva({...rutinaActiva, sesion7: deArregloAObjetoHelper(nuevoarregloEjercicios, 'ejercicio')})
+  
+
+
+  }
+
+
+
+
+
+
+
+
+
   
 
   useEffect(() => {
@@ -514,6 +633,8 @@ export const Rutinas = () => {
 
     setRutinaActiva(rutina[0]);
     setNombreRutina(nombreRutina);
+    setSelectorNombreRutina(nombreRutina);
+
   }
 
 
@@ -527,6 +648,7 @@ export const Rutinas = () => {
       return;
     }
     dispatch(guardarRutina(rutinaActiva));
+    setSelectorNombreRutina(rutinaActiva.nombre);
   }
 
 
@@ -571,10 +693,15 @@ export const Rutinas = () => {
 
 
   // Agregar Nueva Rutina
-  const guardar = async()=>{
+  const guardar = ()=>{
     dispatch(agregarRutina(rutinaActiva));
     // setRutinaActiva(prevActiva =>({...prevActiva, id: rutinas}));
-    console.log("selectorRutinaActiva: ", selectorRutinaActiva);
+    // console.log("selectorRutinaActiva: ", selectorRutinaActiva);
+    // Cambiar nombreRutina
+    setSelectorNombreRutina(rutinaActiva.nombre);
+    
+
+    console.log("Nombre!!!!!!!!!!!!!!: ", selectorRutinaActiva.active.nombre);
   }
 
 
@@ -639,9 +766,9 @@ export const Rutinas = () => {
       <div className='mt-5' style={{width:"95%", backgroundColor: "white"}}>
 
         <table className="table align-middle table-borderless table-sm">
-          <thead >
-            <tr>
-              <th scope="col">#</th>
+          <thead>
+            <tr style={{textAlign:"center"}}>
+              <th scope="col"></th>
               <th scope="col">Ejercicio</th>
               <th scope="col">IMG</th>
               <th scope="col">Video</th>
@@ -666,7 +793,23 @@ export const Rutinas = () => {
                     {/* SELECTOR EJERCICIOS */}
                     <td style={{width:"20%", backgroundColor: "white"}}>
                       {/* El select debe tener el value guardado del objeto en la base de datos value={el alimento de la base de datos} */}
-                      <select onChange={(e)=>{handleSelectChange(e, index, cl)}}  value={ejerciciosSeccion.ejercicio} className="me-2 fs-6 rounded" style={{height:"30px", color:"black", width:"100%", border:"none", backgroundColor: "white"}}>
+                      <select 
+                        onChange={(e)=>{handleSelectChange(e, index, cl)}}
+                        value={ejerciciosSeccion.ejercicio} 
+                        className="me-2 fs-6 rounded" 
+                        style={{
+                          height:"30px", 
+                          color:"black", 
+                          width:"100%", 
+                          border:"none", 
+                          backgroundColor: "white",
+                          appearance: 'none', // Oculta la flecha en navegadores compatibles
+                          WebkitAppearance: 'none', // Para Safari
+                          MozAppearance: 'none', // Para Firefox
+
+                        }}
+                      >
+                        <option value={""}></option>
                         {ejercicios.map((elemento) => (
                           <option key={elemento.ejercicio} value={elemento.ejercicio}>
                             {elemento.ejercicio}
@@ -693,21 +836,41 @@ export const Rutinas = () => {
 
                     {/* PAUSA */}
                     <td>
-                      <select style={{border:"none"}}>
-                        <option>25seg</option>
-                        <option>30seg</option>
-                        <option>40seg</option>
-                        <option>1min</option>
-                        <option>1-2min</option>
-                        <option>2-3min</option>
-                        <option>3-5min</option>
+                      <select 
+                        value={ejerciciosSeccion.pausa}
+                        onChange={(e)=>{handlePausaChange(e, index, cl, sesiones)}}
+                        style={{
+                          border:"none",
+                          backgroundColor: "white",
+                          appearance: 'none', // Oculta la flecha en navegadores compatibles
+                          WebkitAppearance: 'none', // Para Safari
+                          MozAppearance: 'none', // Para Firefox
+
+                        }}
+                      >
+                        <option></option>
+                        <option value={"25seg"}>25seg</option>
+                        <option value={"30seg"}>30seg</option>
+                        <option value={"40seg"}>40seg</option>
+                        <option value={"1min"}>1min</option>
+                        <option value={"1-2min"}>1-2min</option>
+                        <option value={"2-3min"}>2-3min</option>
+                        <option value={"3-5min"}>3-5min</option>
                       </select>
                     </td>
 
 
 
                     {/* EJECUCION */}
-                    <td>video</td>
+                    <td>
+                      <input 
+                        style={{width:"90%", border:"none"}}
+                        value={ejerciciosSeccion.ejecucion}
+                        onChange={(e)=>{handleEjecucionChange(e, index, cl, sesiones)}}
+                        // placeholder={ejerciciosSeccion.ejercicio}
+                      >
+                      </input>
+                    </td>
                 </tr>
               )}})
             }
@@ -749,6 +912,8 @@ export const Rutinas = () => {
           rutinaActiva={rutinaActiva}
           actualizarRutina={actualizarRutina}
           eliminar={eliminar}
+          selectorNombreRutina={selectorNombreRutina}
+          setSelectorNombreRutina={setSelectorNombreRutina}
         />
       </div>
 

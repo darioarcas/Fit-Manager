@@ -23,7 +23,7 @@ const initialState = {
             sesion5:{},
             sesion6:{},
             sesion7:{},
-    },
+        },
     },
     active:{
         rutina:{

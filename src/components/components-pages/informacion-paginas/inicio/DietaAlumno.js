@@ -1,15 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { activarDieta, agregarDieta, cierraFormularioDieta, eliminarDieta, empezarCargaDietas, guardarDieta } from '../../actions/dietas';
-
-import { useForm } from '../../hooks/useForm';
 import { useEffect, useRef } from 'react';
-// import { CalculadoraDesayuno } from './informacion-paginas/dietas/desayuno/CalculadoraDesayuno';
-// import { CalculadoraAlmuerzo } from './informacion-paginas/dietas/almuerzo/CalculadoraAlmuerzo';
-// import { CalculadoraMerienda } from './informacion-paginas/dietas/merienda/CalculadoraMerienda';
-// import { CalculadoraCena } from './informacion-paginas/dietas/cena/CalculadoraCena';
-// import { CalculadoraPostWork } from './informacion-paginas/dietas/post-work/CalculadoraPostWork';
-// import { CalculadoraSnack } from './informacion-paginas/dietas/snack/CalculadoraSnack';
-import { SumaTotal } from './informacion-paginas/dietas/suma-total/SumaTotal';
+
+import { useForm } from '../../../../hooks/useForm';
+import { activarDieta, agregarDieta, cierraFormularioDieta, eliminarDieta, guardarDieta } from '../../../../actions/dietas';
+import { SumaTotal } from '../dietas/suma-total/SumaTotal';
+import { empezarCargaDietasAlumnos } from '../../../../actions/alumno';
+// import { activarDieta, agregarDieta, cierraFormularioDieta, eliminarDieta, guardarDieta } from '../../../actions/dietas';
+// import { SumaTotal } from './../informacion-paginas/dietas/suma-total/SumaTotal';
 
 
 const dietaInit = {
@@ -43,62 +40,37 @@ const dietaInit = {
 
 
 
-export const Dietas = (origen) => {
+export const DietaAlumno = () => {
   
   const dispatch = useDispatch();
-
-
   const user = useSelector(store => store.auth);
-  
+
+
+
+
   useEffect(() => {
-    dispatch(empezarCargaDietas(user.uid));
-  }, [])
+    dispatch(empezarCargaDietasAlumnos(user.uid));
+  }, [user.uid])
   
+  
+  // const alumnoActivoId = useSelector(store=>{ return store.alumnos.active.id});
+  // console.log("ALUMNO ACTIVO ID", alumnoActivoId);
+
+
+  //   dispatch(empezarCargaDietasAlumnos(alumnoActivoId));
+  
+   const dietas =  useSelector (store=>{ return store.alumnos.active.dieta});
 
   
-   const dietas =  useSelector (store=>{
-    if(origen === "usuario"){
-      return store.dietas.dietas
-    } else if (origen === "alumno")  {
-      // try {
-  
-      //   if(store.alumnos.active.dietas){
-
-      //     return store.alumnos.active.dietas   
-      //   }
-  
-      // } catch (error) {
-      //   console.log(error);
-      //   console.log("No existen los datos de dietas del alumno");
-      // }
-        console.log("MIRAAAA!!!: ", store.alumnos.active);
-      // console.log("MIRAAAA!!!: ", store.dietas.active);
-      return store.alumnos.active.dieta
-      // return store.dietas.active
-      // return {id:""}
-
-    }
-  });
-
-  // con moment manejamos las fechas
-  // info: https://momentjs.com/docs/#/displaying/
-  // const fecha = moment(alumnos.fechaCreado);
+  // const dietas = useSelector ( (store)=>{ return {dietas: dietaInit}});
 
 
 
 
 
-console.log("ORIGEN!!!!!!!!!; ", origen);
 
-
-
-  const dietaActiva = useSelector((store)=>{
-    if(origen === "usuario"){
-      return store.dietas.active
-    }else if( origen === "alumno"){
-      return store.alumnos.active.dieta
-    }
-  });
+  // const dietaActiva = useSelector((store)=>{return store.alumnos.active.dieta});
+  const dietaActiva = useSelector((store)=>{return dietas});
 
 
 
@@ -134,7 +106,7 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
 
 
   const handleBorrar = ()=>{
-    dispatch(eliminarDieta(dietaActiva.id));
+    // dispatch(eliminarDieta(dietaActiva.id));
 
   }
 
@@ -195,9 +167,10 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
     
     
     
+
+    // Guardar como nueva dieta en la db del usuario????
     const handleGuardarCambios = ()=>{
-      dispatch(guardarDieta(dietaActiva));
-      // dispatch(cierraFormularioDieta());
+      // dispatch(guardarDieta(dietaActiva));
       
     }
 
@@ -216,7 +189,7 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
   return (
     <div className='w-100'>
       {/* <div style={{zIndex:"-1", width: "100vw", height:"100vh", position:"absolute"}} onClick={()=>cerrarFormulario()}></div> */}
-      <div className='m-0 p-0 w-100 d-flex justify-content-center'>
+      {/* <div className='m-0 p-0 w-100 d-flex justify-content-center'>
 
         <div
           onClick={()=>handleAddNew()}
@@ -227,7 +200,7 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
           Nueva Dieta
         </div>
 
-      </div>
+      </div> */}
 
       
 
@@ -253,29 +226,27 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
 
 
 
+                    <div onClick={()=>handleGuardarCambios()} className="d-block bg-black mb-2 btn btn-outline-info opacity-75 p-0" style={{width: "30%", fontSize: "12px"}}>Guardar como Nueva</div>
 
 
-                    <h4 className='bg-dark text-center text-info p-2' style={{fontWeight: "normal", textTransform: "uppercase"}}>Dieta {index + 1}</h4>
+                    <h4 className='bg-dark text-center text-info p-2' style={{fontWeight: "normal", textTransform: "uppercase"}}>Dieta</h4>
                     
 
                     <div className='p-2'>
-                      <div className='d-flex justify-content-between pl-1 pr-1 fw-bold' style={{fontSize:"12px"}}>
+                      <div className='d-flex pl-1 pr-1 fw-bold' style={{fontSize:"12px"}}>
                         
-                        <div className='d-flex' style={{ height:"20px"}}>
-                          <p className='m-0' style={{width:"50%", height:"100%"}}>Nombre: </p><input type="text" name="nombre" className="bg-white bg-opacity-10 color-dark form-control border-info mb-0 mt-1" style={{width:"50%", height:"25%", border:"none", fontSize:"12px"}} />
+                        <div className='d-flex' style={{ height:"20px", maxWidth: "50%"}}>
+
+                          <p className='m-0'>Fecha:</p><input type="date" name="fecha" className="bg-white bg-opacity-10 color-dark form-control border-info mb-2 mt-1" style={{width:"50%", height:"25%", border:"none", fontSize:"12px"}} value={(dieta.id === dietaActiva.id) ? fecha : dieta.fecha} onChange={handleInputChange} />
                         </div>
 
                         <div className='d-flex' style={{ height:"20px"}}>
-                          <p className='m-0' style={{width:"50%", height:"40%"}}>Proteinas: </p><input type="text" name="proteinas" className="bg-white bg-opacity-10 color-dark form-control border-info mb-0 mt-1" style={{width:"50%", height:"25%", border:"none", fontSize:"12px"}} value={proteinas} />
+                          <p className='m-0' style={{width:"50%", height:"40%", textAlign:"start"}}>Proteinas: {proteinas}</p>
                         </div>
                         
                       </div>
 
                       <div className='d-flex justify-content-between pl-1 pr-1 fw-bold' style={{fontSize:"12px"}}>
-                        <div className='d-flex' style={{ height:"20px", maxWidth: "50%"}}>
-
-                          <p className='m-0'>Fecha:</p><input type="date" name="fecha" className="bg-white bg-opacity-10 color-dark form-control border-info mb-2 mt-1" style={{width:"50%", height:"25%", border:"none", fontSize:"12px"}} value={(dieta.id === dietaActiva.id) ? fecha : dieta.fecha} onChange={handleInputChange} />
-                        </div>
                         <div className='d-flex' style={{ height:"20px"}}>
 
                           <p className='m-0'>Carbohidratos: </p><input type="text" name="carbohidratos" className="bg-white bg-opacity-10 color-dark form-control border-info mb-2 mt-1" style={{width:"50%", height:"25%", border:"none", fontSize:"12px"}} value={(dieta.id === dietaActiva.id) ? carbohidratos : dieta.carbohidratos} />
@@ -542,18 +513,18 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
             })
           }
 
-          {
+          {/* {
             (dietaActiva)
               && 
                 <div onClick={()=>handleBorrar()} className="mt-1 p-1 btn btn-outline-success  position-absolute top-0 start-0  position-fixed" style={{width: "30%", fontSize: "13px"}}>Eliminar Dieta</div>
-          }
+          } */}
 
 
-          {
+          {/* {
             (dietaActiva )// !== dietas.filter()
               && 
-                <div onClick={()=>handleGuardarCambios()} className="mt-1 btn btn-outline-success position-absolute top-0 end-0 position-fixed" style={{width: "30%", fontSize: "13px"}}>Guardar Cambios</div>
-          }
+                <div onClick={()=>handleGuardarCambios()} className="mt-1 btn btn-outline-success" style={{width: "30%", fontSize: "13px"}}>Guardar como Nueva Dieta</div>
+          } */}
 
         </div>
         

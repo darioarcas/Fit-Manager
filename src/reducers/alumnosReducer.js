@@ -1,3 +1,4 @@
+import { types } from "../types/types";
 /*
 
     {
@@ -17,12 +18,43 @@
     }
 
 */
+const dietaInit = {
+    id:"",
+    desayuno1: "",
+    desayuno2: "",
+    desayuno3: "",
+    almuerzo1: "",
+    almuerzo2: "",
+    almuerzo3: "",
+    merienda1: "",
+    merienda2: "",
+    merienda3: "",
+    cena1: "",
+    cena2: "",
+    cena3: "",
+    postWork1: "",
+    postWork2: "",
+    postWork3: "",
+    snack1: "",
+    snack2: "",
+    snack3: "",
+    fecha: new Date().getTime(),
+    calorias: "",
+    proteinas: "",
+    carbohidratos: "",
+    grasas: ""
+  }
 
-import { types } from "../types/types";
+
+
+
+
 
 const initialState = {
     notes: [],
-    active: null
+    active: {
+        dieta: [dietaInit]
+    }
 }
 
 
@@ -35,6 +67,7 @@ export const alumnosReducer = (state = initialState, action)=>{
             return {
                 ...state,
                 active: {
+                    ...state.active,
                     ...action.payload
                 }
             }
@@ -49,7 +82,11 @@ export const alumnosReducer = (state = initialState, action)=>{
                 notes: [...action.payload]
             }
 
-
+        case types.dietaAlumnoLoad:
+            return{
+                ...state,
+                active: {...state.active, dieta:action.payload}
+            }
 
 
 

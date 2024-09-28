@@ -33,6 +33,7 @@ export const types = {
     dietaNew: '[Dieta] New dieta',
     dietaActive: '[Dieta] Set active dieta',
     dietaLoad: '[Dieta] Load dieta',
+    dietaAlumnoLoad: '[Dieta] Load dieta alumno',
     dietaUpdate: '[Dieta] Update dieta',
     dietaDelete: '[Dieta] Delete dieta',
     dietaLogoutCleaning: '[Dieta] Logout Cleaning',

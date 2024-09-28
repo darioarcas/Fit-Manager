@@ -72,7 +72,10 @@ export const SelectorAlimentos1 = ({setAlimentos1, setearAlimentos}) => {
       grasas: (seleccionado.grasas * factor).toFixed(2),
     };
 
+
+    // Guarda el valor en memoria
     setAlimentos1(dietaValores);
+    // Suma el valor con los otros selectores y los envia al reducer
     setearAlimentos(dietaValores, 1);
 
   };

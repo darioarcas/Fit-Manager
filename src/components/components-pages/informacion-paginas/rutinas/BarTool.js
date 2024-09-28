@@ -19,7 +19,9 @@ export const BarTool = ({
     setRutinaActiva,
     rutinaActiva,
     actualizarRutina,
-    eliminar
+    eliminar,
+    selectorNombreRutina,
+    setSelectorNombreRutina
 }) => {
 
 
@@ -29,6 +31,10 @@ export const BarTool = ({
         setNombreRutina(e.target.value);
         console.log("Nombre: ", e.target.value);
         setRutinaActiva(prevActiva=>({...prevActiva, nombre: e.target.value}));
+    }
+
+
+    const handleSelectorNameChange = (nombre)=>{
     }
 
 
@@ -81,8 +87,24 @@ export const BarTool = ({
             <div style={{width:"37%"}}>
                 <p className="text-center mb-0">CARGAR RUTINA</p>
                 <select 
-                    style={{border:"none",borderRadius:"5px", backgroundColor:"#151515", color:"white", width:"100%"}} 
+                    style={{
+                        border:"none",
+                        borderRadius:"5px", 
+                        backgroundColor:"#151515", 
+                        color:"white", 
+                        width:"100%",
+                        textAlign:"center",
+                        appearance: 'none', // Oculta la flecha en navegadores compatibles
+                        WebkitAppearance: 'none', // Para Safari
+                        MozAppearance: 'none', // Para Firefox
+                        // backgroundColor: 'transparent', // Fondo transparente
+                        // padding: '10px', // Espaciado interno (opcional)
+                        // fontSize: '16px', // Tamaño de fuente (opcional)
+
+                    }} 
                     onChange={(e)=>{selectorRutinas(e.target.value)}}
+                    value={selectorNombreRutina}
+                    
                 >
                     <option value="">--Selecciona--</option>
                     {Object.entries(rutinas).map(([clave, valor, index]) => (

@@ -52,7 +52,7 @@ export const SelectorAlimentos2 = ({setAlimentos2, setearAlimentos}) => {
         
       {/* ALIMENTO */}
       <div className="d-flex flex-row" >
-        <div className="d-flex flex-column" style={{width: "30%"}}>
+        <div className="d-flex flex-column" style={{width: "50%"}}>
           <select select="Claras de Huevo (40gr)" id="alimento" onChange={handleSelectChange} value={seleccionado.nombre} className="me-2 fs-6 bg-dark rounded" style={{height:"30px", color:"white"}}>
             {alimentos.map((alimento) => (
               <option key={alimento.nombre} value={alimento.nombre}>
@@ -64,10 +64,10 @@ export const SelectorAlimentos2 = ({setAlimentos2, setearAlimentos}) => {
 
 
         {/* CANTIDAD */}
-        <div className="d-flex flex-column" style={{width: "30%"}}>
+        <div className="d-flex" style={{width: "50%"}}>
           <div className='d-flex flex-row'>
             <input
-                style={{width: "60%", height:"30px", color:"white"}}
+                style={{width: "100%", height:"30px", color:"white"}}
                 type="number"
                 id="cantidad"
                 value={cantidad}
@@ -75,7 +75,7 @@ export const SelectorAlimentos2 = ({setAlimentos2, setearAlimentos}) => {
                 min="0"
                 className="fs-6 bg-dark rounded"
             />
-            <p>
+            <p style={{margin:"0 auto", padding:"0", textAlign:"initial"}}>
                 ({seleccionado.unidad})
             </p>
           </div>
@@ -83,13 +83,13 @@ export const SelectorAlimentos2 = ({setAlimentos2, setearAlimentos}) => {
 
 
         {/* KCal P C G */}
-        <div className="d-flex">
+        {/* <div className="d-flex">
             <div className="d-flex flex-column justify-content-center">
                 <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}}>{(((seleccionado.calorias * (cantidad / seleccionado.cantidad)))/100).toFixed(2)}</p>
             </div>
 
             <div className="d-flex flex-column justify-content-center" >
-                <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}} name="proteinas" value={(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}>{(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}g</p>
+                <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}} name="proteinas" value={(seleccionado.proteinas * (cantidad / (seleccionado.cantidad))).toFixed(2)}>{(seleccionado.proteinas * (cantidad / seleccionado.cantidad)).toFixed(2)}g</p>
             </div>
 
             <div className="d-flex flex-column justify-content-center">
@@ -99,7 +99,7 @@ export const SelectorAlimentos2 = ({setAlimentos2, setearAlimentos}) => {
             <div className="d-flex flex-column justify-content-center">
                 <p style={{height:"30px", marginBottom:"0px", marginTop:"10px"}}>{(seleccionado.grasas * (cantidad / seleccionado.cantidad)).toFixed(2)}g</p>
             </div>
-        </div>
+        </div> */}
 
 
       </div>

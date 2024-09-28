@@ -21,6 +21,7 @@ import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { cargarAlumnos } from "../helpers/cargarAlumnos";
 import { types } from "../types/types"
+import { cargarDietasAlumnos } from "../helpers/cargarDietasAlumnos";
 
 
 
@@ -74,9 +75,26 @@ export const empezarCargaAlumnos = (uid)=>{
       const alumnos = await cargarAlumnos(uid);
       // llamamos a la accion y la enviamos al store
       dispatch(setearAlumnos(alumnos));
+
+      // empezarCargaDietasAlumnos(uid);
+      
   }
 }
 
+export const empezarCargaDietasAlumnos = (uid)=>{
+  return async(dispatch)=>{
+    const dietasAlumnos = await cargarDietasAlumnos(uid);
+    dispatch(setearDietasAlumnosReducer(dietasAlumnos));
+  }
+}
+
+export const setearDietasAlumnosReducer = (dietas)=>{
+  console.log("LA DIETAAAAAAA:   ", dietas);
+    return {
+        type: types.dietaAlumnoLoad,
+        payload: [...dietas]
+    }
+  }
 
 
 

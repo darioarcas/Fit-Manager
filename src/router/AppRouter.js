@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { firebase } from '../firebase/firebase-config';
 import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
-import { empezarCargaAlumnos} from "../actions/alumno";
+import { empezarCargaAlumnos, empezarCargaDietasAlumnos} from "../actions/alumno";
 import { empezarCargaDietas } from "../actions/dietas";
 import { empezarCargaRutinas } from "../actions/rutina";
 
@@ -35,7 +35,7 @@ export const AppRouter = () => {
         firebase.auth().onAuthStateChanged(async (user)=>{
             
             // Si existe el id del usuario
-            if (user?.uid){
+            if(user?.uid) {
                 
                 // Volvemos a cargar el usuario
                 dispatch(login(user.uid, user.displayName));
@@ -44,8 +44,9 @@ export const AppRouter = () => {
                 // // Cargamos los alumnos y las dietas del usuario
                 // // llamamos a la accion y de ahi se envia al store
                 dispatch(empezarCargaAlumnos(user.uid));
-                dispatch(empezarCargaDietas(user.uid));
+                // dispatch(empezarCargaDietas(user.uid));
                 dispatch(empezarCargaRutinas(user.uid));
+                // dispatch(empezarCargaDietasAlumnos(user.uid));
 
         }else{
 
