@@ -1,17 +1,23 @@
 {
   "files": {
     "main.css": "/Fit-Manager/static/css/main.2a97de99.css",
-    "main.js": "/Fit-Manager/static/js/main.4d2c1a05.js",
+    "main.js": "/Fit-Manager/static/js/main.6a8a7c27.js",
     "static/js/213.ccd045e2.chunk.js": "/Fit-Manager/static/js/213.ccd045e2.chunk.js",
     "static/js/732.d48a01b9.chunk.js": "/Fit-Manager/static/js/732.d48a01b9.chunk.js",
+    "static/media/Sanwich-Fit.jpg": "/Fit-Manager/static/media/Sanwich-Fit.368a5305e6ffe9966649.jpg",
+    "static/media/Torta-de-avena.png": "/Fit-Manager/static/media/Torta-de-avena.156cfc5327c7edc4c809.png",
+    "static/media/Tostada-Francesa.png": "/Fit-Manager/static/media/Tostada-Francesa.7a8528e78e0d86e71448.png",
+    "static/media/Crema-de-avena.png": "/Fit-Manager/static/media/Crema-de-avena.c4b49176642f82814776.png",
+    "static/media/Tostado-con-Huevo.jpg": "/Fit-Manager/static/media/Tostado-con-Huevo.90f3820466b566a26196.jpg",
+    "static/media/Tacos-Fit.jpg": "/Fit-Manager/static/media/Tacos-Fit.a84db1c6f22964580063.jpg",
     "index.html": "/Fit-Manager/index.html",
     "main.2a97de99.css.map": "/Fit-Manager/static/css/main.2a97de99.css.map",
-    "main.4d2c1a05.js.map": "/Fit-Manager/static/js/main.4d2c1a05.js.map",
+    "main.6a8a7c27.js.map": "/Fit-Manager/static/js/main.6a8a7c27.js.map",
     "213.ccd045e2.chunk.js.map": "/Fit-Manager/static/js/213.ccd045e2.chunk.js.map",
     "732.d48a01b9.chunk.js.map": "/Fit-Manager/static/js/732.d48a01b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2a97de99.css",
-    "static/js/main.4d2c1a05.js"
+    "static/js/main.6a8a7c27.js"
   ]
 }
