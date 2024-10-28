@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Fit-Manager/static/css/main.a4491500.css",
-    "main.js": "/Fit-Manager/static/js/main.20ee76b5.js",
+    "main.js": "/Fit-Manager/static/js/main.b884e1e8.js",
     "static/js/213.ccd045e2.chunk.js": "/Fit-Manager/static/js/213.ccd045e2.chunk.js",
     "static/js/732.d48a01b9.chunk.js": "/Fit-Manager/static/js/732.d48a01b9.chunk.js",
     "static/media/Sanwich-Fit.jpg": "/Fit-Manager/static/media/Sanwich-Fit.368a5305e6ffe9966649.jpg",
@@ -12,12 +12,12 @@
     "static/media/Tacos-Fit.jpg": "/Fit-Manager/static/media/Tacos-Fit.a84db1c6f22964580063.jpg",
     "index.html": "/Fit-Manager/index.html",
     "main.a4491500.css.map": "/Fit-Manager/static/css/main.a4491500.css.map",
-    "main.20ee76b5.js.map": "/Fit-Manager/static/js/main.20ee76b5.js.map",
+    "main.b884e1e8.js.map": "/Fit-Manager/static/js/main.b884e1e8.js.map",
     "213.ccd045e2.chunk.js.map": "/Fit-Manager/static/js/213.ccd045e2.chunk.js.map",
     "732.d48a01b9.chunk.js.map": "/Fit-Manager/static/js/732.d48a01b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a4491500.css",
-    "static/js/main.20ee76b5.js"
+    "static/js/main.b884e1e8.js"
   ]
 }
