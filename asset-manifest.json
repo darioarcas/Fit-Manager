@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Fit-Manager/static/css/main.f2770021.css",
-    "main.js": "/Fit-Manager/static/js/main.0b605c57.js",
+    "main.js": "/Fit-Manager/static/js/main.49218df1.js",
     "static/js/760.633df4cf.chunk.js": "/Fit-Manager/static/js/760.633df4cf.chunk.js",
     "static/js/265.33b3ebfc.chunk.js": "/Fit-Manager/static/js/265.33b3ebfc.chunk.js",
     "static/media/Sanwich-Fit.jpg": "/Fit-Manager/static/media/Sanwich-Fit.368a5305e6ffe9966649.jpg",
@@ -14,6 +14,6 @@
   },
   "entrypoints": [
     "static/css/main.f2770021.css",
-    "static/js/main.0b605c57.js"
+    "static/js/main.49218df1.js"
   ]
 }
