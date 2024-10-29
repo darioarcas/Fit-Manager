@@ -1,23 +1,19 @@
 {
   "files": {
-    "main.css": "/Fit-Manager/static/css/main.2d26ba76.css",
-    "main.js": "/Fit-Manager/static/js/main.112c818b.js",
-    "static/js/213.ccd045e2.chunk.js": "/Fit-Manager/static/js/213.ccd045e2.chunk.js",
-    "static/js/732.d48a01b9.chunk.js": "/Fit-Manager/static/js/732.d48a01b9.chunk.js",
+    "main.css": "/Fit-Manager/static/css/main.f2770021.css",
+    "main.js": "/Fit-Manager/static/js/main.0b605c57.js",
+    "static/js/760.633df4cf.chunk.js": "/Fit-Manager/static/js/760.633df4cf.chunk.js",
+    "static/js/265.33b3ebfc.chunk.js": "/Fit-Manager/static/js/265.33b3ebfc.chunk.js",
     "static/media/Sanwich-Fit.jpg": "/Fit-Manager/static/media/Sanwich-Fit.368a5305e6ffe9966649.jpg",
     "static/media/Torta-de-avena.png": "/Fit-Manager/static/media/Torta-de-avena.156cfc5327c7edc4c809.png",
     "static/media/Tostada-Francesa.png": "/Fit-Manager/static/media/Tostada-Francesa.7a8528e78e0d86e71448.png",
     "static/media/Crema-de-avena.png": "/Fit-Manager/static/media/Crema-de-avena.c4b49176642f82814776.png",
     "static/media/Tostado-con-Huevo.jpg": "/Fit-Manager/static/media/Tostado-con-Huevo.90f3820466b566a26196.jpg",
     "static/media/Tacos-Fit.jpg": "/Fit-Manager/static/media/Tacos-Fit.a84db1c6f22964580063.jpg",
-    "index.html": "/Fit-Manager/index.html",
-    "main.2d26ba76.css.map": "/Fit-Manager/static/css/main.2d26ba76.css.map",
-    "main.112c818b.js.map": "/Fit-Manager/static/js/main.112c818b.js.map",
-    "213.ccd045e2.chunk.js.map": "/Fit-Manager/static/js/213.ccd045e2.chunk.js.map",
-    "732.d48a01b9.chunk.js.map": "/Fit-Manager/static/js/732.d48a01b9.chunk.js.map"
+    "index.html": "/Fit-Manager/index.html"
   },
   "entrypoints": [
-    "static/css/main.2d26ba76.css",
-    "static/js/main.112c818b.js"
+    "static/css/main.f2770021.css",
+    "static/js/main.0b605c57.js"
   ]
 }
