@@ -1,6 +1,13 @@
-// Contiene las acciones que puedes realizar en un alumno
+import Swal from "sweetalert2";
+import { db } from "../firebase/firebase-config";
+import { cargarAlumnos } from "../helpers/cargarAlumnos";
+import { types } from "../types/types"
+import { cargarDietasAlumnos } from "../helpers/cargarDietasAlumnos";
 
 
+
+
+// alumno.js contiene las acciones que puedes realizar en un alumno
 
 /*
   // Configuracion de las reglas de la base de datos en firebase
@@ -15,13 +22,101 @@
     }
   }
 
+
+
+
+///////////// ESTRUCTURA DE UNA DIETA
+
+const dietaInit = {
+    id:"",
+    desayuno1: "",
+    desayuno2: "",
+    desayuno3: "",
+    almuerzo1: "",
+    almuerzo2: "",
+    almuerzo3: "",
+    merienda1: "",
+    merienda2: "",
+    merienda3: "",
+    cena1: "",
+    cena2: "",
+    cena3: "",
+    postWork1: "",
+    postWork2: "",
+    postWork3: "",
+    snack1: "",
+    snack2: "",
+    snack3: "",
+    fecha: new Date().getTime(),
+    calorias: "",
+    proteinas: "",
+    carbohidratos: "",
+    grasas: ""
+  }
+
 */
 
-import Swal from "sweetalert2";
-import { db } from "../firebase/firebase-config";
-import { cargarAlumnos } from "../helpers/cargarAlumnos";
-import { types } from "../types/types"
-import { cargarDietasAlumnos } from "../helpers/cargarDietasAlumnos";
+
+const dietaInit = {
+  id:"",
+  desayuno1: "",
+  desayuno2: "",
+  desayuno3: "",
+  almuerzo1: "",
+  almuerzo2: "",
+  almuerzo3: "",
+  merienda1: "",
+  merienda2: "",
+  merienda3: "",
+  cena1: "",
+  cena2: "",
+  cena3: "",
+  calculadorasAlimentos:{
+    selectorAlimentosDesayuno:{},
+    selectorAlimentosAlmuerzo:{},
+    selectorAlimentosMerienda:{},
+    selectorAlimentosCena:{},
+    selectorAlimentosPostWork:{},
+    selectorAlimentosSnack:{},
+  },
+  rutina:{
+    id:"", 
+    nombre:"", 
+    sesion1:{ejercicio1:{}},
+  },
+  ruitnaABS:{
+    ejercicio1:{}, 
+    ejercicio2:{}, 
+    ejercicio3:{}
+  }, 
+  cardio:{}, 
+  diasEntrenamiento:{
+    semana1:{}, 
+    semana2:{}
+  },
+  progreso:{},
+  recetas:{},
+  suplementacion:{
+    suplemento1:{suplemento:"", nota:""}, 
+    suplemento2:{suplemento:"", nota:""}, 
+    suplemento3:{suplemento:"", nota:""}
+  },
+  postWork1: "",
+  postWork2: "",
+  postWork3: "",
+  snack1: "",
+  snack2: "",
+  snack3: "",
+  fecha: new Date().getTime(),
+  calorias: "",
+  proteinas: "",
+  carbohidratos: "",
+  grasas: ""
+}
+
+
+
+
 
 
 
@@ -47,8 +142,12 @@ export const agregarAlumno = () => {
     }
 
     const doc = await db.collection(`${uid}/grupo/alumnos`).add(nuevoAlumno);
-    dispatch(activarAlumno(doc.id, nuevoAlumno));
-    dispatch(agregarNuevoAlumno(doc.id, nuevoAlumno));
+    //Crear la dieta del alumno
+    const dietaId = await db.collection(`${uid}/grupo/alumnos/${doc.id}/dieta`).add(dietaInit);
+
+    dispatch(activarAlumno(doc.id, nuevoAlumno, dietaId.id));
+    dispatch(agregarNuevoAlumno(doc.id, nuevoAlumno, dietaId.id));
+
   }
 }
 
@@ -56,11 +155,12 @@ export const agregarAlumno = () => {
 
 
 
-export const agregarNuevoAlumno = (id, alumno)=>{
+export const agregarNuevoAlumno = (id, alumno, dietaId)=>{
   return {
       type: types.alumnoAddNew,
       payload:{
           id,
+          dietaId,
           ...alumno
       }
   }
@@ -81,18 +181,42 @@ export const empezarCargaAlumnos = (uid)=>{
   }
 }
 
-export const empezarCargaDietasAlumnos = (uid)=>{
-  return async(dispatch)=>{
-    const dietasAlumnos = await cargarDietasAlumnos(uid);
-    dispatch(setearDietasAlumnosReducer(dietasAlumnos));
+
+
+export const empezarCargaDietasAlumnos = (uid, id, dietaId)=>{
+  
+  
+  return async(dispatch, getState)=>{
+    dispatch(setearCarga(false));
+    // Monitoreo de carga de los datos
+    const dietasAlumnos = await cargarDietasAlumnos(uid, id, dietaId);
+    if(dietasAlumnos.length === 0){
+     dispatch(setearDietasAlumnosReducer([dietaInit]));
+    }
+    else{
+      dispatch(setearDietasAlumnosReducer(dietasAlumnos, dietaId));
+    }
+    dispatch(setearCarga(true));
+
   }
 }
 
-export const setearDietasAlumnosReducer = (dietas)=>{
-  console.log("LA DIETAAAAAAA:   ", dietas);
+
+const setearCarga = (carga)=>{
+  return{
+    type: types.dietaAlumnoCarga,
+    payload: carga
+  }
+}
+
+
+
+
+
+export const setearDietasAlumnosReducer = (dietas, dietaId)=>{
     return {
         type: types.dietaAlumnoLoad,
-        payload: [...dietas]
+        payload: [{...dietas[0], id: dietaId}]
     }
   }
 
@@ -120,13 +244,14 @@ export const cierraFormulario = ()=>{
 
 
 
-export const activarAlumno = (id, alumno)=>{
+export const activarAlumno = (id, alumno, dietaId)=>{
 
   return{
     
     type: types.alumnoActive,
     payload: {
       id,
+      dietaId,
       ...alumno
     }
   }
@@ -136,7 +261,7 @@ export const activarAlumno = (id, alumno)=>{
 
 
 // actualizar alumno
-export const guardarAlumno = (alumno)=>{
+export const guardarAlumno = (alumno, alumnoSinDieta)=>{
 
   // utilizamos el midleware
   return async (dispatch, getState)=>{
@@ -145,12 +270,12 @@ export const guardarAlumno = (alumno)=>{
       const uid = getState().auth.uid;
 
       // creamos una copia de la nota para eliminar el id
-      const alumnoAFirestore = {...alumno};
+      const alumnoAFirestore = {...alumnoSinDieta};
       // eliminamos el id
       delete alumnoAFirestore.id;
       
       // grabamos en la base de datos
-      await db.doc(`${uid}/grupo/alumnos/${alumno.id}`).update(alumnoAFirestore);
+      await db.doc(`${uid}/grupo/alumnos/${alumnoSinDieta.id}`).update(alumnoAFirestore);
 
 
       // Actualizamos el alumno en el store
@@ -185,10 +310,11 @@ export const refrescarAlumnos = (id, alumno)=>{
 
 
 
-export const eliminarAlumno = (id)=>{
+export const eliminarAlumno = (id, dietaId)=>{
   return async(dispatch, getState)=>{
 
       const uid = getState().auth.uid;
+      await db.doc(`${uid}/grupo/alumnos/${id}/dieta/${dietaId}`).delete();
       await db.doc(`${uid}/grupo/alumnos/${id}`).delete();
 
       Swal.fire({
@@ -218,3 +344,76 @@ export const cerrarSesionAlumno = ()=>{
       type: types.alumnoLogoutCleaning
   }
 }
+
+
+
+
+
+
+////////////////////      FICHA DEL ALUMNO 
+
+
+
+
+
+
+
+
+export const activarDietaAlumno = (id, dieta)=>{
+
+  return{
+    
+    type: types.dietaActiveAlumnoFicha,
+    payload: {...dieta, id: id}
+  }
+}
+
+
+
+
+
+// actualizar la dieta del alumno
+export const actualizarDietaAlumno = (dieta, alumnoId)=>{
+
+  // utilizamos el midleware
+  return async (dispatch, getState)=>{
+
+
+      const uid = getState().auth.uid;
+
+      // creamos una copia de la nota para eliminar el id
+      const dietaAFirestore = {...dieta};
+      // eliminamos el id
+      delete dietaAFirestore.id;
+      
+      // grabamos en la base de datos
+      // Debe tener la siguiente estructura: 
+      // /hr9cf7O1gSQ6O1Cm0SVLIbBwlJk1/grupo/alumnos/yDQdhdDe2GEnzCXWNKSK/dieta/eqIuWWvnVNxvGzt5gyGG
+      await db.doc(`${uid}/grupo/alumnos/${alumnoId}/dieta/${dieta.id}`).update(dietaAFirestore);
+
+
+      // Actualizamos el alumno en el store
+      // dispatch(refrescarDietaAlumno(dieta));
+
+      // Swal.fire('Guardado', note.title, 'success');
+      Swal.fire({
+          title: 'Guardado',
+          timer: 800,
+          icon: 'success'
+      });
+  }
+}
+
+
+
+
+
+// export const refrescarDietaAlumno = (dieta)=>{
+//   return {
+//       type: types.dietaUpdateAlumnoFicha,
+//       payload: {
+//           dieta
+//       }
+
+//   }
+// }

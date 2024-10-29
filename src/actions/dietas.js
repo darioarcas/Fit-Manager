@@ -30,6 +30,32 @@ export const agregarDieta = () => {
             cena1: "",
             cena2: "",
             cena3: "",
+            calculadorasAlimentos:{
+              selectorAlimentosDesayuno:{},
+              selectorAlimentosAlmuerzo:{},
+              selectorAlimentosMerienda:{},
+              selectorAlimentosCena:{},
+              selectorAlimentosPostWork:{},
+              selectorAlimentosSnack:{},
+            },
+            rutina:{
+              id:"", 
+              nombre:"", 
+              sesion1:{ejercicio1:{}},
+            },
+            ruitnaABS:{
+              ejercicio1:{}, 
+              ejercicio2:{}, 
+              ejercicio3:{}
+            }, 
+            cardio:{}, 
+            diasEntrenamiento:{
+              semana1:{}, 
+              semana2:{}
+            },
+            progreso:{},
+            recetas:{},
+            suplementacion:{},
             postWork1: "",
             postWork2: "",
             postWork3: "",
@@ -98,10 +124,7 @@ export const empezarCargaDietas = (uid)=>{
     return{
       
       type: types.dietaActive,
-      payload: {
-        id,
-        ...dieta
-      }
+      payload: {id, ...dieta}
     }
   }
 

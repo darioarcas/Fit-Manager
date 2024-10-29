@@ -1,4 +1,3 @@
-import { alimentos } from "../arreglos"
 import { CalorieCalculator } from "./CalculadorCalorias";
 
 
@@ -8,7 +7,7 @@ import { CalorieCalculator } from "./CalculadorCalorias";
 
 
 
-export const CalculadoraSnack = ({sumatoriaTotal, setCalculadoraSnack}) => {
+export const CalculadoraSnack = ({sumatoriaTotal, setCalculadoraSnack, actualizarFormulario, setCambioEnCalculadora}) => {
 
 
   return (
@@ -24,7 +23,12 @@ export const CalculadoraSnack = ({sumatoriaTotal, setCalculadoraSnack}) => {
 
         {/* CALCULADORA */}
         <div className="offcanvas-body p-0">
-            <CalorieCalculator sumatoriaTotal={sumatoriaTotal} setCalculadoraSnack={setCalculadoraSnack} />
+            <CalorieCalculator
+              sumatoriaTotal={sumatoriaTotal} 
+              setCalculadoraSnack={setCalculadoraSnack}
+              actualizarFormulario={actualizarFormulario}
+              setCambioEnCalculadora={setCambioEnCalculadora}
+            />
         </div>
 
       </div>

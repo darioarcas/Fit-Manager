@@ -7,9 +7,7 @@
 export const BarTool = ({
     selectorEjercicios,
     numeroEjercicios,
-    activarEstaRutina,
     guardar,
-    numeroSesionActiva,
     selectorSesiones,
     numeroSesiones,
     rutinas,
@@ -17,11 +15,9 @@ export const BarTool = ({
     nombreRutina,
     setNombreRutina,
     setRutinaActiva,
-    rutinaActiva,
     actualizarRutina,
     eliminar,
     selectorNombreRutina,
-    setSelectorNombreRutina
 }) => {
 
 
@@ -34,8 +30,6 @@ export const BarTool = ({
     }
 
 
-    const handleSelectorNameChange = (nombre)=>{
-    }
 
 
 

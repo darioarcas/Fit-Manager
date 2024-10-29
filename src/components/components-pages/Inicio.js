@@ -1,10 +1,9 @@
 import { AlumnoInfo } from './informacion-paginas/inicio/AlumnoInfo';
 import { useDispatch, useSelector } from 'react-redux';
-import { activarAlumno, agregarAlumno } from '../../actions/alumno';
+import { activarAlumno, actualizarDietaAlumno, agregarAlumno } from '../../actions/alumno';
 import { Ficha } from './informacion-paginas/inicio/Ficha';
-import { Rutinas } from './Rutinas';
-import { DietaAlumno } from './informacion-paginas/inicio/DietaAlumno';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { ContadorDeDias } from './informacion-paginas/inicio/ContadorDeDias';
 
 // import moment from "moment"; // npm i moment --save
 
@@ -28,30 +27,44 @@ export const Inicio = (valor) => {
 
   
   const alumnos = useSelector(store=>{return store.alumnos.notes});
+  const alumnoActivoId = useSelector(store=>{ if(store.alumnos.active.id !== ""){return store.alumnos.active.id}else{return "no-existe"} });
+  const dietas =  useSelector (store=>{ return store.alumnos.active.dieta[0]});
   
   // Para simular el click del boton para cerrar el formulario
   const botonRef = useRef(null);
+  const botonFicha = useRef(null);
 
   // con moment manejamos las fechas
   // info: https://momentjs.com/docs/#/displaying/
   // const fecha = moment(alumnos.fechaCreado);
 
   const alumnoActivo = useSelector((store)=>{return store.alumnos.active});
+  const [clickFichaOFormulario, setClickFichaOFormulario] = useState("");
 
+  // const cambioDeIdAlumno = useRef("2");
+  // const cambioDeIdAlumno = useRef(alumnoActivo.id);
+  
 
-
-  const handleAlumno = (id, alumno)=>{
+  const handleAlumno = (id, alumno, formularioOFicha)=>{
+    if(formularioOFicha === "formulario") setClickFichaOFormulario("formulario");
     dispatch(activarAlumno(id, alumno));
+    // Crea el historial del navegador para volver atras
+    window.history.pushState({}, '');
   }
 
 
+
   const cargarFicha = (id, alumno)=>{
-    handleAlumno(id, alumno);
+    setClickFichaOFormulario("ficha");
+    handleAlumno(id, alumno, "ficha");
 
     // Añade una clase para cargar las dietas y rutinas
     const fichaShow = document.getElementById("ficha");    
     fichaShow.classList.add('cargar-ficha');
+    // // Crea el historial del navegador para volver atras
+    // window.history.pushState({}, '');
   }
+
   
   
   
@@ -61,11 +74,22 @@ export const Inicio = (valor) => {
 
     if(fichaShow !== null){
       // Carga los datos de la ficha solo cuando el boton Ficha es presionado
-      if(fichaShow.classList.contains("cargar-ficha")){
+      if(fichaShow.classList.contains("cargar-ficha") && clickFichaOFormulario === "ficha" && alumnoActivo.id !== ""){
+        
+
+        // este condicional da problemas de carga en la ficha
+        // if(cambioDeIdAlumno.current !== alumnoActivo.id){ 
+        //   cambioDeIdAlumno.current = alumnoActivo.id;
+        //   // Para que la ficha se cargue recien la segunda vez que sea llamada
+        //   return;
+        // }
+
+
+        // Cada vez que se haga click sobre la misma ficha se cargue la segunda vez que sea llamada
+        // cambioDeIdAlumno.current = "un-id-no-valido";
+        // console.log("Se Cargo La Ficha");
         return <>
-          <Ficha/>
-          <DietaAlumno/>
-          <Rutinas/>
+          <Ficha alumnoActivo={alumnoActivo} botonFicha={botonFicha} />          
         </> 
       }
     }
@@ -75,25 +99,44 @@ export const Inicio = (valor) => {
 
 
 
+
+
+
+
   const handleAddNew = ()=>{
     dispatch(agregarAlumno());
   }
 
 
 
+  // Guardar como nueva dieta en la db del usuario????
+  const handleGuardarCambios = ()=>{
+    // dispatch(guardarDieta(dietaActiva));
+    // console.log("dietas: ", dietas, "ALUMNO ID: ", alumnoActivoId);
+    dispatch(actualizarDietaAlumno(dietas, alumnoActivoId));
+    
+  }
+
+
+
+  
   
 
   return (
     <div>
-      <div className='m-0 p-0 w-100 d-flex justify-content-center'>
-
         <div
           onClick={()=>handleAddNew()}
-          className='mt-5 w-50 btn btn-outline-success me-2 mb-3 '
+          className='mt-3 w-25 p-0 me-2  position-absolute top-0 end-0 z-3'
           
         >
-          Agregar Alumno
+          <div className='d-flex flex-column justify-content-center text-bg-dark rounded'>
+            <p className='color-white text-center m-0'>Agregar</p>
+            <h2 className='text-center text-success fs-1 fw-bold w-100 p-0 m-0'>+</h2>
+          </div>
+
         </div>
+      <div className='m-0 p-0 w-100 d-flex justify-content-center'>
+
 
       </div>
 
@@ -158,7 +201,7 @@ export const Inicio = (valor) => {
 
 
 
-      <div className='d-flex flex-wrap w-100' style={{overflow:"clip"}}>
+      <div className='d-flex flex-wrap w-100' style={{overflow:"clip", marginTop:"20%"}}>
 
         {
 
@@ -189,7 +232,7 @@ export const Inicio = (valor) => {
                         <h5 className="card-title m-0 fw-semibold">{alumno.nombre}</h5>
                         <div className="card-title m-0 p-0" style={{fontSize:"9px"}}>{alumno.pais}</div>
                       </div>
-                      <p className="card-text m-0 fw-semibold" style={{color:"#91ded8"}}>Finaliza en: días</p>
+                      <p className="card-text m-0 fw-semibold">{<ContadorDeDias startDate={`${alumno.fechaInicio}`} months={parseInt(alumno.plan)}/>}</p>
                       <p className="card-text m-0 fw-semibold opacity-75">costo: ${alumno.costo}</p>
                       <div className='d-flex justify-content-between'>
                         <div
@@ -205,7 +248,7 @@ export const Inicio = (valor) => {
                         
                         <div 
                           className="btn btn-primary py-1 px-2" 
-                          onClick={()=>{ return handleAlumno(alumno.id, alumno)}} 
+                          onClick={()=>{ return handleAlumno(alumno.id, alumno, "formulario")}} 
                           data-bs-toggle="modal" 
                           data-bs-target="#formulario"
                         >Form</div>
@@ -222,10 +265,6 @@ export const Inicio = (valor) => {
       </div>
 
 
-      {/* {
-        (alumnoActivo )
-          // &&
-        } */}
       
 
       
@@ -233,7 +272,7 @@ export const Inicio = (valor) => {
       <div className="modal fade w-100" id="formulario" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered d-flex justify-content-center">
           <div className="modal-content w-75 bg-transparent">
-          {(alumnoActivo) && <AlumnoInfo botonRef={botonRef} />}
+          {(clickFichaOFormulario === "formulario") && <AlumnoInfo botonRef={botonRef} />}
           
           <div ref={botonRef} data-bs-dismiss="modal" type="button" className="btn bg-dark" style={{visibility:"hidden",height:"0px", width:"0px"}}></div>
           
@@ -248,14 +287,18 @@ export const Inicio = (valor) => {
       {/* FICHA */}
       <div className="modal fade" style={{width:"100vw", height:"100vh"}} id="ficha" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered d-flex justify-content-center">
-          <div className="modal-content" style={{marginBottom:"50%"}}>
+          <div className="modal-content bg-transparent" style={{marginBottom:"50%"}}>
             
             
             {/* CONTENIDO */}
+            <div className='bg-white rounded'>
+              {funcionSow()}
+            </div>
             
-            {funcionSow()}            
-            
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <div>
+              <button onClick={handleGuardarCambios} type="button" className="btn btn-outline-info fw-normal mt-4 w-25 mx-5">Guardar</button>
+              <button ref={botonFicha} type="button" className="btn btn-outline-secondary mt-4 w-25 mx-5 fw-bold" data-bs-dismiss="modal">Cerrar</button>
+            </div>
             
           </div>
         </div>

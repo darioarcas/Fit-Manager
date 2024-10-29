@@ -1,6 +1,7 @@
 import firebase from "firebase/app"; // npm i firebase@8.10.0
 import 'firebase/firestore';
 import 'firebase/auth';
+// import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 
 
 
@@ -27,5 +28,8 @@ const firebaseConfig = {
   export {
     db,
     googleAuthProvider,
-    firebase
+    firebase,
+    // getAuth,
+    // signInAnonymously, 
+    // onAuthStateChanged
   }

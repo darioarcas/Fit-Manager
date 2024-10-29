@@ -1,77 +1,76 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarTool } from './informacion-paginas/rutinas/BarTool';
 import { ejercicios } from './informacion-paginas/rutinas/RutinasArreglos';
 import { activarRutina, agregarRutina, eliminarRutina, guardarRutina } from '../../actions/rutina';
 import { useDispatch, useSelector } from 'react-redux';
 import { deArregloAObjetoHelper } from '../../helpers/deArregloAObjeto';
-import App from './CalculadoraIC';
 import Swal from 'sweetalert2';
 
 
 
-// Rutina
-const rutinaInit = {
-  id:"",
-  nombre:"Asigna un Nombre",
-  sesion1:{
-      ejercicio1:{
-          ejercicio: "",
-          img: "",
-          video: "",
-          pausa: "",
-          ejecucion: ""
-      },
-  },
-  sesion2:{
-    ejercicio1:{
-      ejercicio: "",
-      img: "",
-      video: "",
-      pausa: "",
-      ejecucion: ""
-    },
-  },
-  sesion3:{
-    ejercicio1:{
-      ejercicio: "",
-      img: "",
-      video: "",
-      pausa: "",
-      ejecucion: ""
-    },
-  },
-  sesion4:{},
-  sesion5:{},
-  sesion6:{},
-  sesion7:{},
-}
+// // Rutina
+// const rutinaInit = {
+//   id:"",
+//   nombre:"Asigna un Nombre",
+//   sesion1:{
+//       ejercicio1:{
+//           ejercicio: "",
+//           img: "",
+//           video: "",
+//           pausa: "",
+//           ejecucion: ""
+//       },
+//   },
+//   sesion2:{
+//     ejercicio1:{
+//       ejercicio: "",
+//       img: "",
+//       video: "",
+//       pausa: "",
+//       ejecucion: ""
+//     },
+//   },
+//   sesion3:{
+//     ejercicio1:{
+//       ejercicio: "",
+//       img: "",
+//       video: "",
+//       pausa: "",
+//       ejecucion: ""
+//     },
+//   },
+//   sesion4:{},
+//   sesion5:{},
+//   sesion6:{},
+//   sesion7:{},
+// }
 
 
 
 
-const ejercicioInit = [
-  {
-    ejercicio: "juancito",
-    img: "",
-    video: "",
-    pausa: "",
-    ejecucion: ""
-  },
-  {
-    ejercicio: "",
-    img: "",
-    video: "",
-    pausa: "",
-    ejecucion: ""
-  },
-  {
-    ejercicio: "",
-    img: "",
-    video: "",
-    pausa: "",
-    ejecucion: ""
-  }
-]
+// const ejercicioInit = [
+//   {
+//     ejercicio: "juancito",
+//     img: "",
+//     video: "",
+//     pausa: "",
+//     ejecucion: ""
+//   },
+//   {
+//     ejercicio: "",
+//     img: "",
+//     video: "",
+//     pausa: "",
+//     ejecucion: ""
+//   },
+//   {
+//     ejercicio: "",
+//     img: "",
+//     video: "",
+//     pausa: "",
+//     ejecucion: ""
+//   }
+// ]
 
 
 
@@ -146,7 +145,7 @@ export const Rutinas = () => {
   const [numeroEjercicios, setNumeroEjercicios] = useState(Object.values(rutinaActiva.sesion1).length);
 
 
-  const [auxiliar, setAuxiliar] = useState([]);
+  // const [auxiliar, setAuxiliar] = useState([]);
   const [numeroSesiones, setNumeroSesiones] = useState(Object.values(rutinaActiva).length - 2);
 
   const [nombreRutina, setNombreRutina] = useState(rutinaActiva.nombre)
@@ -343,7 +342,7 @@ export const Rutinas = () => {
 
       const rutinaNueva = [];
       // Descartamos el id y el nombre
-      Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave !== 'id' && clave !== 'nombre' ){
           rutinaNueva.push(valor);
         }
@@ -351,18 +350,18 @@ export const Rutinas = () => {
       
       
       const id = [];
-      Object.entries(rutinaActiva).map(([clave, valor])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave === 'id'){
           id.push(valor);
         }
       });
       const nombre = [];
-      Object.entries(rutinaActiva).map(([clave, valor])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave === 'nombre'){
           nombre.push(valor);
         }
       });
-      arregloInicial.map((objeto, index)=>{rutinaNueva.push(arregloInicial[index]);})
+      arregloInicial.forEach((objeto, index)=>{rutinaNueva.push(arregloInicial[index]);})
 
       setRutinaActiva(deArregloAObjetoHelper(rutinaNueva, 'sesion'));
       setRutinaActiva(prevRutinaActiva=>({...prevRutinaActiva, id: id[0]}));
@@ -378,7 +377,7 @@ export const Rutinas = () => {
       // Eliminar los últimos objetos
       const rutinaNueva = [];
       // Descartamos el id y el nombre
-      Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave !== 'id' && clave !== 'nombre' ){
           rutinaNueva.push(valor);
         }
@@ -386,13 +385,13 @@ export const Rutinas = () => {
 
 
       const id = [];
-      Object.entries(rutinaActiva).map(([clave, valor])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave === 'id'){
           id.push(valor);
         }
       });
       const nombre = [];
-      Object.entries(rutinaActiva).map(([clave, valor])=>{
+      Object.entries(rutinaActiva).forEach(([clave, valor])=>{
         if(clave === 'nombre'){
           nombre.push(valor);
         }
@@ -424,7 +423,7 @@ export const Rutinas = () => {
 
     const largoSesionesActivas = [];
     // Descartamos el id y el nombre
-    Object.entries(rutinaActiva).map(([clave, valor, index])=>{
+    Object.entries(rutinaActiva).forEach(([clave, valor, index])=>{
       if(clave !== 'id' && clave !== 'nombre' ){
         largoSesionesActivas.push(Object.values(valor).length);
       }
@@ -504,14 +503,14 @@ export const Rutinas = () => {
 
 
       // Fusionamos los arreglos nuevos con los viejos
-      arregloInicialSesion1.map((objeto, index)=>{sesionesNuevas1.push(arregloInicialSesion1[index]);})
+      arregloInicialSesion1.forEach((objeto, index)=>{sesionesNuevas1.push(arregloInicialSesion1[index]);})
       // Primero comprobamos que las constantes sean distintas de un numero entero con la funcion Number.isInteger()
-      arregloInicialSesion2.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas2)){sesionesNuevas2.push(arregloInicialSesion2[index]);}})
-      arregloInicialSesion3.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas3)){sesionesNuevas3.push(arregloInicialSesion3[index]);}})
-      arregloInicialSesion4.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas4)){sesionesNuevas4.push(arregloInicialSesion4[index]);}})
-      arregloInicialSesion5.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas5)){sesionesNuevas5.push(arregloInicialSesion5[index]);}})
-      arregloInicialSesion6.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas6)){sesionesNuevas6.push(arregloInicialSesion6[index]);}})
-      arregloInicialSesion7.map((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas7)){sesionesNuevas7.push(arregloInicialSesion7[index]);}})
+      arregloInicialSesion2.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas2)){sesionesNuevas2.push(arregloInicialSesion2[index]);}})
+      arregloInicialSesion3.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas3)){sesionesNuevas3.push(arregloInicialSesion3[index]);}})
+      arregloInicialSesion4.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas4)){sesionesNuevas4.push(arregloInicialSesion4[index]);}})
+      arregloInicialSesion5.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas5)){sesionesNuevas5.push(arregloInicialSesion5[index]);}})
+      arregloInicialSesion6.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas6)){sesionesNuevas6.push(arregloInicialSesion6[index]);}})
+      arregloInicialSesion7.forEach((objeto, index)=>{ if(!Number.isInteger(sesionesNuevas7)){sesionesNuevas7.push(arregloInicialSesion7[index]);}})
       
       
 
@@ -625,7 +624,7 @@ export const Rutinas = () => {
   const selectorRutinas = (nombreRutina)=>{
     if(nombreRutina === "") return;
     const rutina = [];
-    Object.entries(rutinas).map(([clave, valor, index])=>{
+    Object.entries(rutinas).forEach(([clave, valor])=>{
       if(valor.nombre === nombreRutina){
         rutina.push(valor);
       }
@@ -705,7 +704,7 @@ export const Rutinas = () => {
   }
 
 
-  const idViejo = useRef(rutinaActiva.id);
+  // const idViejo = useRef(rutinaActiva.id);
 
   // if(idViejo.current !== selectorRutinaActiva.active.id && selectorRutinaActiva.active.id){
   //   console.log("ID Viejo: ", idViejo.current, "        ID Nuevo: ",selectorRutinaActiva.active.id);
@@ -716,18 +715,7 @@ export const Rutinas = () => {
   
 
 
-  
 
-  const numeroSesionActiva = (numero)=>{
-    // const ejerciciosSesion = Object.entries(rutinaActiva).map(([clave, valor])=>{
-
-    // });
-  }
-
-
-  const numeroSesion = (numero)=>{
-
-  }
 
 
 
@@ -768,12 +756,12 @@ export const Rutinas = () => {
         <table className="table align-middle table-borderless table-sm">
           <thead>
             <tr style={{textAlign:"center"}}>
-              <th scope="col"></th>
-              <th scope="col">Ejercicio</th>
-              <th scope="col">IMG</th>
-              <th scope="col">Video</th>
-              <th scope="col">Pausa</th>
-              <th scope="col">Ejecucion</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>°</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>Ejercicio</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>IMG</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>Video</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>Pausa</th>
+              <th scope="col" className='text-bg-secondary fw-normal'>Ejecucion</th>
             </tr>
           </thead>
           <tbody>
@@ -901,7 +889,6 @@ export const Rutinas = () => {
           numeroEjercicios={numeroEjercicios}
           activarEstaRutina={activarEstaRutina}
           guardar={guardar}
-          numeroSesionActiva={numeroSesionActiva}
           selectorSesiones={selectorSesiones}
           numeroSesiones={numeroSesiones}
           rutinas={rutinas}
@@ -919,7 +906,6 @@ export const Rutinas = () => {
 
 
 
-      {/* <App /> */}
     </div>
   )
 }

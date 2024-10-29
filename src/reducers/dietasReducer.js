@@ -6,7 +6,32 @@ import { types } from "../types/types";
 
 const init = {
     dietas: [],
-    active: {id: ''}
+    active: {
+        id:"",
+        // desayuno1: "",
+        // desayuno2: "",
+        // desayuno3: "",
+        // almuerzo1: "",
+        // almuerzo2: "",
+        // almuerzo3: "",
+        // merienda1: "",
+        // merienda2: "",
+        // merienda3: "",
+        // cena1: "",
+        // cena2: "",
+        // cena3: "",
+        // postWork1: "",
+        // postWork2: "",
+        // postWork3: "",
+        // snack1: "",
+        // snack2: "",
+        // snack3: "",
+        // fecha: new Date().getTime(),
+        // calorias: "",
+        // proteinas: "",
+        // carbohidratos: "",
+        // grasas: ""
+    }
 }
 
 export const dietasReducer = (state = init, action) => {
@@ -47,9 +72,7 @@ export const dietasReducer = (state = init, action) => {
         case types.dietaActive:
             return {
                 ...state,
-                active: {
-                    ...action.payload
-                }
+                active: {...action.payload}
             }
 
 

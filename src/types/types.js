@@ -20,24 +20,27 @@ export const types = {
     cerrarFormulario: '[Form] Cierra Formulario',
 
 
-    alumnoAddNew: '[Alumno] New alumno',
-    alumnoActive: '[Alumno] Set active alumno',
-    alumnoLoad: '[Alumno] Load alumno',
-    alumnoUpdate: '[Alumno] Update alumno',
-    alumnoFileUrl: '[Alumno] Update image url',
-    alumnoDelete: '[Alumno] Delete alumno',
-    alumnoLogoutCleaning: '[Alumno] Logout Cleaning',
+    alumnoAddNew: '[Alumno] alumno-Add-New',
+    alumnoActive: '[Alumno] alumno-Active',
+    alumnoLoad: '[Alumno] alumno-Load',
+    alumnoUpdate: '[Alumno] alumno-Update',
+    alumnoFileUrl: '[Alumno] alumno-File-Url',
+    alumnoDelete: '[Alumno] alumno-Delete',
+    alumnoLogoutCleaning: '[Alumno] alumno-Logout-Cleaning',
+    dietaAlumnoLoad: '[Alumno] dieta-Alumno-Load',
+    dietaUpdateAlumnoFicha: '[Alumno] dieta-Update-Alumno-Ficha',
+    dietaActiveAlumnoFicha: '[Alumno] dieta-Active-Alumno-Ficha',
+    dietaAlumnoCarga: '[Alumno] dieta-Alumno-Carga',
     
     
     
-    dietaNew: '[Dieta] New dieta',
-    dietaActive: '[Dieta] Set active dieta',
-    dietaLoad: '[Dieta] Load dieta',
-    dietaAlumnoLoad: '[Dieta] Load dieta alumno',
-    dietaUpdate: '[Dieta] Update dieta',
-    dietaDelete: '[Dieta] Delete dieta',
-    dietaLogoutCleaning: '[Dieta] Logout Cleaning',
-    dietaCerrarFormulario: '[Dieta] Close Formulario',
+    dietaNew: '[Dieta] dieta-New',
+    dietaActive: '[Dieta] dieta-Active',
+    dietaLoad: '[Dieta] dieta-Load',
+    dietaUpdate: '[Dieta] dieta-Update',
+    dietaDelete: '[Dieta] dieta-Delete',
+    dietaLogoutCleaning: '[Dieta] dieta-Logout-Cleaning',
+    dietaCerrarFormulario: '[Dieta] dieta-Cerrar-Formulario',
 
 
 

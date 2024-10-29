@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'; // npm install sweetalert2
 import { types } from "../types/types";
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
+// import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { finishLoading, startLoading } from "./ui";
 import { cerrarSesionAlumno } from './alumno';
 // import { noteLogout } from './notes';
@@ -19,7 +20,7 @@ export const startLoginEmailPassword = (email, password)=>{
             .then(async({user})=>{
                 
                 // De esta forma podemos actualizar el nombre
-                // await user.updateProfile({displayName: 'Juancito'});
+                // await user.updateProfile({displayName: 'Anónimo'});
 
                 dispatch(login(user.uid, user.displayName));
 
@@ -60,7 +61,7 @@ export const startGoogleLogin = ()=>{
     return (dispatch)=>{
         firebase.auth().signInWithPopup(googleAuthProvider)
             .then(({ user }) =>{
-                dispatch(login(user.uid, user.displayName))
+                dispatch(login(user.uid, user.displayName));
             })
     }
 }
@@ -99,3 +100,5 @@ export const logout = ()=>{
         type: types.logout
     }
 }
+
+

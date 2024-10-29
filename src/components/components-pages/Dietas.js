@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { activarDieta, agregarDieta, cierraFormularioDieta, eliminarDieta, empezarCargaDietas, guardarDieta } from '../../actions/dietas';
+import { activarDieta, agregarDieta, eliminarDieta, empezarCargaDietas, guardarDieta } from '../../actions/dietas';
 
 import { useForm } from '../../hooks/useForm';
 import { useEffect, useRef } from 'react';
@@ -12,32 +12,32 @@ import { useEffect, useRef } from 'react';
 import { SumaTotal } from './informacion-paginas/dietas/suma-total/SumaTotal';
 
 
-const dietaInit = {
-  id:"",
-  desayuno1: "",
-  desayuno2: "",
-  desayuno3: "",
-  almuerzo1: "",
-  almuerzo2: "",
-  almuerzo3: "",
-  merienda1: "",
-  merienda2: "",
-  merienda3: "",
-  cena1: "",
-  cena2: "",
-  cena3: "",
-  postWork1: "",
-  postWork2: "",
-  postWork3: "",
-  snack1: "",
-  snack2: "",
-  snack3: "",
-  fecha: new Date().getTime(),
-  calorias: "",
-  proteinas: "",
-  carbohidratos: "",
-  grasas: ""
-};
+// const dietaInit = {
+//   id:"",
+//   desayuno1: "",
+//   desayuno2: "",
+//   desayuno3: "",
+//   almuerzo1: "",
+//   almuerzo2: "",
+//   almuerzo3: "",
+//   merienda1: "",
+//   merienda2: "",
+//   merienda3: "",
+//   cena1: "",
+//   cena2: "",
+//   cena3: "",
+//   postWork1: "",
+//   postWork2: "",
+//   postWork3: "",
+//   snack1: "",
+//   snack2: "",
+//   snack3: "",
+//   fecha: new Date().getTime(),
+//   calorias: "",
+//   proteinas: "",
+//   carbohidratos: "",
+//   grasas: ""
+// };
 
 
 
@@ -71,7 +71,6 @@ export const Dietas = (origen) => {
       //   console.log(error);
       //   console.log("No existen los datos de dietas del alumno");
       // }
-        console.log("MIRAAAA!!!: ", store.alumnos.active);
       // console.log("MIRAAAA!!!: ", store.dietas.active);
       return store.alumnos.active.dieta
       // return store.dietas.active
@@ -138,10 +137,7 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
 
   }
 
-  const cerrarFormulario = ()=>{
-    console.log("ACTIVE: NULL");
-    // dispatch(cierraFormularioDieta());
-  }
+
 
 
 
@@ -186,8 +182,9 @@ console.log("ORIGEN!!!!!!!!!; ", origen);
     
     // graba en memoria (en el store) los cambios del formulario
     useEffect(() => {
-      
       dispatch(activarDieta(formValues.id, {...formValues}));
+
+
       
     }, [formValues, dispatch])
     

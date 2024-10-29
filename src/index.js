@@ -5,7 +5,7 @@ import './styles/style.scss'; // npm i sass
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <FitManagerAppPublico />
-  </React.StrictMode>
+    <React.StrictMode>
+      <FitManagerAppPublico />
+    </React.StrictMode>
 );

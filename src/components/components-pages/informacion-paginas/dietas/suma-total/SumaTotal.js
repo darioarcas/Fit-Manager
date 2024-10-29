@@ -20,7 +20,7 @@ const initialArray = {
 
 
 
-export const SumaTotal = () => {
+export const SumaTotal = ({setCambioEnCalculadora, actualizarFormulario}) => {
 
 
 
@@ -32,6 +32,7 @@ export const SumaTotal = () => {
     const [calculadoraCena, setCalculadoraCena] = useState(initialArray);
     const [calculadoraPostWork, setCalculadoraPostWork] = useState(initialArray);
     const [calculadoraSnack, setCalculadoraSnack] = useState(initialArray);
+    const [valorCalorias, setValorCalorias] = useState({desayuno: 0, almuerzo: 0, merienda: 0, cena: 0, postWork: 0, snack: 0});
 
 
 
@@ -51,6 +52,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma1, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, desayuno: suma1.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                // setCambioEnCalculadora(true);
 
                 break;
 
@@ -66,6 +70,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma2, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, almuerzo: suma2.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                setCambioEnCalculadora(true);
 
 
                 break;
@@ -82,6 +89,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma3, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, merienda: suma3.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                setCambioEnCalculadora(true);
 
 
                 break;
@@ -98,6 +108,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma4, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, cena: suma4.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                setCambioEnCalculadora(true);
 
 
                 break;
@@ -114,6 +127,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma5, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, postWork: suma5.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                setCambioEnCalculadora(true);
 
 
                 break;
@@ -130,6 +146,9 @@ export const SumaTotal = () => {
                 }
 
                 dispatch(actualizarProteina(id, suma6, dietaActiva));
+                setValorCalorias(prev=>{return {...prev, snack: suma6.calorias}});
+                // Activamos el cambio en el formulario para que deje de leer desde la db
+                setCambioEnCalculadora(true);
 
 
                 break;
@@ -146,12 +165,48 @@ export const SumaTotal = () => {
 
 
     return<>
-        <CalculadoraDesayuno sumatoriaTotal={sumatoriaTotal} setCalculadoraDesayuno={setCalculadoraDesayuno} />
-        <CalculadoraAlmuerzo sumatoriaTotal={sumatoriaTotal} setCalculadoraAlmuerzo={setCalculadoraAlmuerzo} />
-        <CalculadoraMerienda sumatoriaTotal={sumatoriaTotal} setCalculadoraMerienda={setCalculadoraMerienda} />
-        <CalculadoraCena sumatoriaTotal={sumatoriaTotal} setCalculadoraCena={setCalculadoraCena} />
-        <CalculadoraPostWork sumatoriaTotal={sumatoriaTotal} setCalculadoraPostWork={setCalculadoraPostWork} />
-        <CalculadoraSnack sumatoriaTotal={sumatoriaTotal} setCalculadoraSnack={setCalculadoraSnack} />
+        <CalculadoraDesayuno 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraDesayuno={setCalculadoraDesayuno} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario}
+        />
+        <CalculadoraAlmuerzo 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraAlmuerzo={setCalculadoraAlmuerzo} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario} 
+        />
+        <CalculadoraMerienda 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraMerienda={setCalculadoraMerienda} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario} 
+        />
+        <CalculadoraCena 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraCena={setCalculadoraCena} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario} 
+        />
+        <CalculadoraPostWork 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraPostWork={setCalculadoraPostWork} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario} 
+        />
+        <CalculadoraSnack 
+            sumatoriaTotal={sumatoriaTotal} 
+            setCalculadoraSnack={setCalculadoraSnack} 
+            valorCalorias={valorCalorias} 
+            setCambioEnCalculadora={setCambioEnCalculadora} 
+            actualizarFormulario={actualizarFormulario} 
+        />
 
     </>
 

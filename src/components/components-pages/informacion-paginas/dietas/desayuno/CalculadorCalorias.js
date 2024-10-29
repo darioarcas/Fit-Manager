@@ -1,16 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { alimentos } from '../arreglos';
-import { useDispatch, useSelector } from 'react-redux';
-import { actualizarProteina } from '../../../../../actions/dietas';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { SelectorAlimentos1 } from './SelectorAlimentos1';
-import { SelectorAlimentos2 } from './SelectorAlimentos2';
-import { SelectorAlimentos3 } from './SelectorAlimentos3';
-import { SelectorAlimentos4 } from './SelectorAlimentos4';
-import { SelectorAlimentos5 } from './SelectorAlimentos5';
-import { SelectorAlimentos6 } from './SelectorAlimentos6';
-import { SelectorAlimentos7 } from './SelectorAlimentos7';
 
-const initialArray = { 
+const initialObject = { 
   calorias: 0,
   proteinas: 0,
   carbohidratos: 0,
@@ -21,70 +13,23 @@ const initialArray = {
 
 
 
-export const CalorieCalculator = ({sumatoriaTotal, setCalculadoraDesayuno}) => {
+export const CalorieCalculator = ({sumatoriaTotal, setCalculadoraDesayuno, actualizarFormulario, setCambioEnCalculadora}) => {
 
   const dietaActiva = useSelector((store)=>{return store.dietas.active});
 
 
   // Almacena el estado de cada alimento para que se sumen
-  const [alimentos1, setAlimentos1] = useState(initialArray);
-  const [alimentos2, setAlimentos2] = useState(initialArray);
-  const [alimentos3, setAlimentos3] = useState(initialArray);
-  const [alimentos4, setAlimentos4] = useState(initialArray);
-  const [alimentos5, setAlimentos5] = useState(initialArray);
-  const [alimentos6, setAlimentos6] = useState(initialArray);
-  const [alimentos7, setAlimentos7] = useState(initialArray);
+  const [alimentos1, setAlimentos1] = useState(initialObject);
+  const [alimentos2, setAlimentos2] = useState(initialObject);
+  const [alimentos3, setAlimentos3] = useState(initialObject);
+  const [alimentos4, setAlimentos4] = useState(initialObject);
+  const [alimentos5, setAlimentos5] = useState(initialObject);
+  const [alimentos6, setAlimentos6] = useState(initialObject);
+  const [alimentos7, setAlimentos7] = useState(initialObject);
 
 
   // Para que se dispare el estado inicial de la suma
   const [numero, setNumero] = useState(0)
-
-
-
-  const dispatch = useDispatch();
-  // const [seleccionado, setSeleccionado] = useState(alimentos[0]);
-  // const [cantidad, setCantidad] = useState(0);
-
-
-
-  // const handleSelectChange = (e) => {
-  //   // Devuelve el primer elemento del array que cumple con la condición
-  //   const alimentoSeleccionado = alimentos.find(a => a.nombre === e.target.value);
-  //   setSeleccionado(alimentoSeleccionado);
-  //   setCantidad(0); // Reiniciar la cantidad al cambiar el alimento
-  // };
-
-
-
-
-
-  
-  
-  
-  // // // Calcular los valores cuando cambia la cantidad
-  // useEffect(() => {
-  //   const calcularValores = () => {
-      
-  //     const factor = cantidad / seleccionado.cantidad;
-      
-      
-  //     return {
-        
-  //       calorias: (seleccionado.calorias * factor).toFixed(2),
-  //       proteinas: (seleccionado.proteinas * factor).toFixed(2),
-  //       carbohidratos: (seleccionado.carbohidratos * factor).toFixed(2),
-  //       grasas: (seleccionado.grasas * factor).toFixed(2),
-  //     };
-      
-  //   };
-  //   const totales = calcularValores();
-  // }, [cantidad])
-  
-  
-  
-  
-
-
 
 
 
@@ -197,65 +142,6 @@ export const CalorieCalculator = ({sumatoriaTotal, setCalculadoraDesayuno}) => {
 
 
 
-  
-  // Calcular los valores en tiempo real (Se dispara muchas veces)
-  
-  // const calcularValores = () => {
-    
-    //     const factor = cantidad / seleccionado.cantidad;
-    //     console.log("Me dispare");
-
-
-  //     return {
-  //       calorias: (seleccionado.calorias * factor).toFixed(2),
-  //       proteinas: (seleccionado.proteinas * factor).toFixed(2),
-  //       carbohidratos: (seleccionado.carbohidratos * factor).toFixed(2),
-  //       grasas: (seleccionado.grasas * factor).toFixed(2),
-  //     };
-  // };
-
-  // const totales = calcularValores();
-
-
-
-
-
-
-
-
-  // const handleInputChange = (e) => {
-
-  //   setCantidad(e.target.value);
-  //   // Seteamos el input para modificarlo y enviarlo al padre
-  //   // setInput(e);
-
-  //   // Cargamos el nuevo valor de las proteinas en el padre
-
-
-
-  //   // Proteinas
-  //   // const ppp = {...e};
-  //   // ppp.target.name = "proteinas";
-  //   const factor = e.target.value / seleccionado.cantidad;
-  //   const dietaValores = {
-  //     calorias: (seleccionado.calorias * factor).toFixed(2),
-  //     proteinas: (seleccionado.proteinas * factor).toFixed(2),
-  //     carbohidratos: (seleccionado.carbohidratos * factor).toFixed(2),
-  //     grasas: (seleccionado.grasas * factor).toFixed(2),
-  //   };
-  //   // ppp.target.value = proteinasValor;
-  //   // // setInput(ppp);
-  //   // proteinasHijo(ppp);
-
-
-
-  //   dispatch(actualizarProteina(dietaActiva.id, dietaValores, dietaActiva));
-    
-
-  // };
-
-
-
 
 
 
@@ -263,45 +149,20 @@ export const CalorieCalculator = ({sumatoriaTotal, setCalculadoraDesayuno}) => {
     <div className="container mt-4 " style={{fontSize: "12px"}}>
 
       {/* Alimento Cantidad KCal P Car G */}
-
-
+      
+      
       <SelectorAlimentos1
         setAlimentos1={setAlimentos1}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos2
         setAlimentos2={setAlimentos2}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos3
         setAlimentos3={setAlimentos3}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos4
         setAlimentos4={setAlimentos4}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos5
         setAlimentos5={setAlimentos5}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos6
         setAlimentos6={setAlimentos6}
-        setearAlimentos={setearAlimentos}
-      />
-
-      <SelectorAlimentos7
         setAlimentos7={setAlimentos7}
         setearAlimentos={setearAlimentos}
+        actualizarFormulario={actualizarFormulario}
+        setCambioEnCalculadora={setCambioEnCalculadora}
       />
-
-
-
 
     </div>
   );

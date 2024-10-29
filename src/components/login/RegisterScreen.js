@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
-import validator from "validator";
+// import validator from "validator";
 import { useDispatch, useSelector } from 'react-redux';
 import { removeError, setError } from '../../actions/ui';
 import { starRegisterEmailPasswordName } from '../../actions/auth';
@@ -39,10 +39,12 @@ export const RegisterScreen = () => {
     if(name.trim().length === 0){
       dispatch(setError("Nombre no valido"));
       return false;
-    }else if(!validator.isEmail(email)){
-      dispatch(setError("El Email no es Valido"));
-      return false;
-    }else if (password1 !== password2 || password1.length <= 5 || password2.length === 0){
+    }
+    // else if(!validator.isEmail(email)){
+    //   dispatch(setError("El Email no es Valido"));
+    //   return false;
+    // }
+    else if (password1 !== password2 || password1.length <= 5 || password2.length === 0){
       dispatch(setError("La contraseña no es Valida o es menor a 6 caracteres"));
       return false;
     }

@@ -54,7 +54,8 @@ const initialState = {
     notes: [],
     active: {
         dieta: [dietaInit]
-    }
+    },
+    carga: false
 }
 
 
@@ -121,7 +122,10 @@ export const alumnosReducer = (state = initialState, action)=>{
         case types.alumnoDelete:
             return{
                 ...state,
-                active: null,
+                active: {
+                    // El estado siempre debe tener una dieta
+                    dieta: [dietaInit]
+                },
                 // Devuelve todos los alumnos, exeptuando el que coincida con el id del payload
                 notes: state.notes.filter(alumno => alumno.id !== action.payload)
             }
@@ -148,6 +152,40 @@ export const alumnosReducer = (state = initialState, action)=>{
                 active: null,
                 notes: []
             }
+
+
+
+
+
+
+        ///////////////// FICHA
+
+
+        // Dieta Activa
+        case types.dietaActiveAlumnoFicha:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    dieta: [{...action.payload}]
+                }
+            }
+        
+        
+        
+        
+        
+        // Carga de la Dieta
+        case types.dietaAlumnoCarga:
+            return {
+                ...state,
+                carga: action.payload
+            }
+
+
+
+
+
 
         default:
             return state;

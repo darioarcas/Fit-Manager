@@ -4,7 +4,7 @@ import { NavBar } from "./components/navbar/NavBar"
 export const FitManagerApp = () => {
   return (
       // <div className="feet-manager">
-      <div className="h-100 overflow-hidden">
+      <div className="overflow-hidden">
         <NavBar/>
 
         <FitScreen/>      
